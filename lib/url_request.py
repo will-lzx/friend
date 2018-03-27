@@ -39,13 +39,13 @@ class UrlRequest:
                         {
                             "type": "view",
                             "name": "最新活动",
-                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive%2Fweixin%2Flatest%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect"
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Flatest%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(WEIXIN_APPID)
                             # "url": "http://182.61.21.208/weixin/create1/"
                         },
                         {
                             "type": "view",
                             "name": "历史活动",
-                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive%2Fweixin%2Fhistory%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect"
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fhistory%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(WEIXIN_APPID)
                             # "url": "http://182.61.21.208/weixin/create1/"
                         }
                     ]
@@ -58,13 +58,13 @@ class UrlRequest:
                         {
                             "type": "view",
                             "name": "情感专家",
-                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive%2Fweixin%2Fexpert%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect"
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fexpert%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(WEIXIN_APPID)
                             # "url": "http://182.61.21.208/weixin/create1/"
                         },
                         {
                             "type": "view",
                             "name": "帅哥美女",
-                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive%2Fweixin%2Fbeauty%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect"
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fbeauty%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(WEIXIN_APPID)
                             # "url": "http://182.61.21.208/weixin/create1/"
                         }
                     ]
@@ -76,7 +76,7 @@ class UrlRequest:
                         {
                             "type": "view",
                             "name": "个人中心",
-                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive%2Fweixin%2Fprivatecenter%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect"
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive%2Fweixin%2Fprivatecenter%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(WEIXIN_APPID)
                             #"url": "http://182.61.21.208/weixin/others/"
                         }
                     ]

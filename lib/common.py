@@ -32,7 +32,3 @@ def get_openid(code):
     url_req = UrlRequest()
     resp = url_req.url_request(url)
     return resp['openid']
-
-
-if __name__ == '__main__':
-    subcribe_save_openid('123')
