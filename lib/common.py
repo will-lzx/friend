@@ -19,7 +19,7 @@ def subcribe_save_openid(openid):
     customers = Customer.objects.filter(openid=openid)
 
     print('lends,', len(customers))
-    if len(customers) > 0:
+    if len(customers) == 0:
         Customer.objects.create(**customer_dict)
     else:
         print('customer exists already')
