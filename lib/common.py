@@ -20,7 +20,10 @@ def subcribe_save_openid(openid):
     customers = Customer.objects.filter(openid=openid)
 
     if customers:
+        print(customers)
         Customer.objects.create(**customer_dict)
+    else:
+        print('fuck')
 
 
 def get_openid(code):
