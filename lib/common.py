@@ -18,6 +18,7 @@ def subcribe_save_openid(openid):
                      }
     customers = Customer.objects.filter(openid=openid)
 
+    print('lends,', len(customers))
     if len(customers) > 0:
         Customer.objects.create(**customer_dict)
     else:
@@ -31,3 +32,7 @@ def get_openid(code):
     url_req = UrlRequest()
     resp = url_req.url_request(url)
     return resp['openid']
+
+
+if __name__ == '__main__':
+    subcribe_save_openid('123')
