@@ -19,7 +19,7 @@ def subcribe_save_openid(openid):
     print('openid is,', openid)
     customers = Customer.objects.filter(openid=openid)
 
-    if customers is None:
+    if customers:
         Customer.objects.create(**customer_dict)
 
 
