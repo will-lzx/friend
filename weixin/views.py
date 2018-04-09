@@ -15,7 +15,6 @@ from lib.common import create_timestamp, subcribe_save_openid, get_openid
 @csrf_exempt
 def wx(request):
     if request.method == 'GET':
-        print('wx get msg')
         signature = request.GET.get('signature', '')
         timestamp = request.GET.get('timestamp', '')
         nonce = request.GET.get('nonce', '')
@@ -91,6 +90,19 @@ def history(request):
 
 def expert(request):
     template_name = 'weixin/experts.html'
+
+    open_id = get_open_id(request)
+
+    context = {
+        'open_id': open_id,
+    }
+
+    response = render(request, template_name, context)
+    return response
+
+
+def join(request):
+    template_name = 'weixin/join.html'
 
     open_id = get_open_id(request)
 

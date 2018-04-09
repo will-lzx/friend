@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^history/$', views.history, name='history'),
     url(r'^beauty/$', views.beauty, name='beauty'),
     url(r'^expert/$', views.expert, name='expert'),
+
+    url(r'^join/$', views.join, name='join'),
 ]
