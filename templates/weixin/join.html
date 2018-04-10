@@ -64,9 +64,45 @@
                     <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入手机号码">
                 </div>
             </div>
-
-
         </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="select2">
+                        <option value="1">生日</option>
+                    </select>
+                </div>
+                <div class="weui-cell__bd">
+                    <select class="weui-select" name="select2">
+                        {% for k, v in years.items %}
+                            <option value="{{ k }}" {% ifequal k 15 %}selected{% endifequal %}>{{ v }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select class="weui-select" name="select2">
+                        {% for k, v in months.items %}
+                            <option value="{{ k }}" >{{ v }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select class="weui-select" name="select2">
+                        {% for k, v in days.items %}
+                            <option value="{{ k }}">{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <label for="weuiAgree" class="weui-agree">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <span class="weui-agree__text">
+                阅读并同意<a href="javascript:void(0);">《相关条款》</a>
+            </span>
+        </label>
+
+        <a href="javascript:;" class="weui-btn weui-btn_primary">下一步</a>
 
 
     </form>

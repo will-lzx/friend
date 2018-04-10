@@ -105,9 +105,29 @@ def join(request):
     template_name = 'weixin/join.html'
 
     open_id = get_open_id(request)
+    years = {}
+    months = {}
+    days = {}
+    start_value = 2030
+
+    for i in range(80):
+        years[i+1] = start_value - i
+
+    start_value = 1
+
+    for i in range(12):
+        months[i+1] = start_value + i
+
+    start_value = 1
+
+    for i in range(31):
+        days[i+1] = start_value + i
 
     context = {
         'open_id': open_id,
+        'years': years,
+        'months': months,
+        'days': days
     }
 
     response = render(request, template_name, context)
