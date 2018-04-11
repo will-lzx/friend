@@ -2,17 +2,17 @@
 
 {% block content %}
 
-    <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
+    <form id="fm" action="/weixin/join2/" method="post" novalidate style="margin:0;padding:20px 50px">
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
-                    <select class="weui-select" name="select1">
+                    <select class="weui-select" name="name-select">
                         <option selected="" value="1">姓名</option>
                     </select>
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入姓名">
+                    <input class="weui-input" type="text" name="name" placeholder="请输入姓名">
                 </div>
             </div>
 
@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <select class="weui-select" name="select1">
+                    <select class="weui-select" name="sex">
                         <option selected="" value="1">男</option>
                         <option value="2">女</option>
                     </select>
@@ -39,15 +39,15 @@
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
-                    <select class="weui-select" name="select1">
-                        <option selected="" value="1">微信号</option>
-                        <option value="2">QQ号</option>
-                        <option value="3">Email</option>
+                    <select class="weui-select" name="number-type">
+                        {% for k, v in number_type.items %}
+                            <option selected="" value="{{ k }}">{{ v }}</option>
+                        {% endfor %}
                     </select>
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入号码">
+                    <input class="weui-input" type="text" name="number" placeholder="请输入号码">
                 </div>
             </div>
 
@@ -56,12 +56,12 @@
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
-                    <select class="weui-select" name="select2">
+                    <select class="weui-select" name="number-location">
                         <option value="1">+86</option>
                     </select>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" pattern="[0-9]*" placeholder="请输入手机号码">
+                    <input class="weui-input" type="number" name="phone-number" pattern="[0-9]*" placeholder="请输入手机号码">
                 </div>
             </div>
         </div>
@@ -74,19 +74,19 @@
                     </select>
                 </div>
                 <div class="weui-cell__bd">
-                    <select class="weui-select" name="select2">
+                    <select class="weui-select" name="birth-year">
                         {% for k, v in years.items %}
                             <option value="{{ k }}" {% ifequal k 15 %}selected{% endifequal %}>{{ v }}</option>
                         {% endfor %}
                     </select>
 
-                    <select class="weui-select" name="select2">
+                    <select class="weui-select" name="birth-month">
                         {% for k, v in months.items %}
                             <option value="{{ k }}" >{{ v }}</option>
                         {% endfor %}
                     </select>
 
-                    <select class="weui-select" name="select2">
+                    <select class="weui-select" name="birth-day">
                         {% for k, v in days.items %}
                             <option value="{{ k }}">{{ v }}</option>
                         {% endfor %}
@@ -102,7 +102,7 @@
             </span>
         </label>
 
-        <a href="javascript:;" class="weui-btn weui-btn_primary">下一步</a>
+        <input class="weui-btn weui-btn_primary" type="submit" value="下一步">
 
 
     </form>

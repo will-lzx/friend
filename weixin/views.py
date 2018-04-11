@@ -8,7 +8,7 @@ from wechatpy.events import SubscribeEvent
 from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 
-from friendplatform.settings import WECHAT_TOKEN
+from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE
 from lib.common import create_timestamp, subcribe_save_openid, get_openid
 
 
@@ -127,11 +127,41 @@ def join(request):
         'open_id': open_id,
         'years': years,
         'months': months,
-        'days': days
+        'days': days,
+        'number_type': NUMBER_TYPE
     }
 
     response = render(request, template_name, context)
     return response
+
+
+@csrf_exempt
+def join2(request):
+    template_name = 'weixin/join2.html'
+    if request.method == 'POST':
+        name = request.POST.get('name', None)
+        sex = request.POST.get('sex', None)
+        number_type = request.POST.get('number-type', None)
+        number = request.POST.get('number', None)
+        number_location = request.POST.get('number-location', None)
+        phone_number = request.POST.get('phone-number', None)
+        birth_year = request.POST.get('birth-year', None)
+        birth_month = request.POST.get('birth-month', None)
+        birth_day = request.POST.get('birth-day', None)
+
+        context = {
+            'name': name,
+            'sex': sex,
+            'number_type': number_type,
+            'number': number,
+            'number_location': number_location,
+            'phone_number': phone_number,
+            'birth_year': birth_year,
+            'birth_month': birth_month,
+            'birth_day': birth_day
+        }
+        response = render(request, template_name, context)
+        return response
 
 
 def beauty(request):
