@@ -78,8 +78,7 @@
                         <option value="1">生日</option>
                     </select>
                 </div>
-                <div style="padding: 20px">
-                    <div class="weui-cell__bd">
+
                         <select class="weui-select" name="birth-year">
                             {% for k, v in years.items %}
                                 <option value="{{ k }}" {% ifequal k 30 %}selected{% endifequal %}>{{ v }}</option>
@@ -97,8 +96,7 @@
                                 <option value="{{ k }}">{{ v }}</option>
                             {% endfor %}
                         </select>
-                    </div>
-                </div>
+                    
 
             </div>
         </div>
