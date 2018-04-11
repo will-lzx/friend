@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form id="fm" action="/weixin/join2/" method="post" novalidate style="margin:0;padding:10px 10px">
+    <form id="fm" action="/weixin/join2/" method="post" novalidate style="margin:0;padding:10px">
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
@@ -29,8 +29,7 @@
 
             </div>
 
-            <div class="weui-cell weui-cell_select weui-cell_select-before">
-
+            <div class="weui-cell_select weui-cell_select-before">
                 <div class="weui-cells__hd">
                     <select class="weui-select" name="sex">
                         <option selected="" value="1">男</option>
@@ -73,30 +72,34 @@
 
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
+
                 <div class="weui-cell__hd">
                     <select class="weui-select" name="select2">
                         <option value="1">生日</option>
                     </select>
                 </div>
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="birth-year">
-                        {% for k, v in years.items %}
-                            <option value="{{ k }}" {% ifequal k 15 %}selected{% endifequal %}>{{ v }}</option>
-                        {% endfor %}
-                    </select>
+                <div style="padding: 0px">
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" name="birth-year">
+                            {% for k, v in years.items %}
+                                <option value="{{ k }}" {% ifequal k 30 %}selected{% endifequal %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
 
-                    <select class="weui-select" name="birth-month">
-                        {% for k, v in months.items %}
-                            <option value="{{ k }}" >{{ v }}</option>
-                        {% endfor %}
-                    </select>
+                        <select class="weui-select" name="birth-month">
+                            {% for k, v in months.items %}
+                                <option value="{{ k }}" >{{ v }}</option>
+                            {% endfor %}
+                        </select>
 
-                    <select class="weui-select" name="birth-day">
-                        {% for k, v in days.items %}
-                            <option value="{{ k }}">{{ v }}</option>
-                        {% endfor %}
-                    </select>
+                        <select class="weui-select" name="birth-day">
+                            {% for k, v in days.items %}
+                                <option value="{{ k }}">{{ v }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
+
             </div>
         </div>
 
