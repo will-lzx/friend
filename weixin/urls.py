@@ -26,5 +26,6 @@ urlpatterns = [
 
     url(r'^join/$', views.join, name='join'),
     url(r'^join2/$', views.join2, name='join2'),
+    url(r'^upload/$', views.upload, name='upload'),
 
 ]

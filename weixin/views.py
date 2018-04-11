@@ -164,6 +164,11 @@ def join2(request):
         return response
 
 
+@csrf_exempt
+def upload(request):
+    return HttpResponse('')
+
+
 def beauty(request):
     template_name = 'weixin/beauties.html'
 
