@@ -45,19 +45,7 @@
 
 
         $.weui = {};
-        $.weui.alert = function(options) {
-            options = $.extend({
-                title: '警告',
-                text: '警告内容'
-            }, options);
-            var $alert = $('.weui_dialog_alert');
-            $alert.find('.weui_dialog_title').text(options.title);
-            $alert.find('.weui_dialog_bd').text(options.text);
-            $alert.on('touchend click', '.weui_btn_dialog', function () {
-                $alert.hide();
-            });
-            $alert.show();
-        };
+
 
         $(function() {
             // 允许上传的图片类型
@@ -70,8 +58,6 @@
             $('#js_file').on('change', function (event) {
                 var files = event.target.files;
 
-                alert('0');
-
                 // 如果没有选中文件，直接返回
                 if (files.length === 0) {
                     return;
@@ -83,16 +69,12 @@
 
                     // 如果类型不在允许的类型范围内
                     if (allowTypes.indexOf(file.type) === -1) {
-                        $.weui.alert({
-                            text: '该类型不允许上传'
-                        });
+                        alert('该类型不允许上传');
                         continue;
                     }
 
                     if ($('.weui_uploader_file').length >= maxCount) {
-                        $.weui.alert({
-                            text: '最多只能上传' + maxCount + '张图片'
-                        });
+                        alert('该类型不允许上传');
                         return;
                     }
 
