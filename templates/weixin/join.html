@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form id="fm" action="/weixin/join2/" method="post" novalidate style="margin:0;padding:10px">
+    <form id="fm" action="/weixin/join2/" method="post" style="margin:0;padding:10px">
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="name" placeholder="请输入姓名">
+                    <input class="weui-input" type="text" required name="name" placeholder="请输入姓名">
                 </div>
             </div>
 
@@ -45,13 +45,13 @@
                 <div class="weui-cell__hd">
                     <select class="weui-select" name="number-type">
                         {% for k, v in number_type.items %}
-                            <option selected="" value="{{ k }}">{{ v }}</option>
+                            <option value="{{ k }}" {% ifequal k 1 %}selected{% endifequal %}>{{ v }}</option>
                         {% endfor %}
                     </select>
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="number" placeholder="请输入号码">
+                    <input class="weui-input" type="text" required name="number" placeholder="请输入号码">
                 </div>
             </div>
 
@@ -65,7 +65,7 @@
                     </select>
                 </div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" name="phone-number" pattern="[0-9]*" placeholder="请输入手机号码">
+                    <input class="weui-input" type="number" required name="phone-number" pattern="[0-9]*" placeholder="请输入手机号码">
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
         </div>
 
         <label for="weuiAgree" class="weui-agree">
-            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox">
+            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" required>
             <span class="weui-agree__text">
                 阅读并同意<a href="javascript:void(0);">《相关条款》</a>
             </span>
