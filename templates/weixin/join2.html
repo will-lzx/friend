@@ -47,9 +47,7 @@
                 <a class="weui-btn weui-btn_primary" href="#" id="publish" type="submit" onclick="login()">发布记录</a>
         </div>
     <div id="errormsg" class="fk_tip"></div>
-
-    <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
-
+    
     <script>
         $.ajaxSetup({data: {
             csrfmiddlewaretoken: '{{ csrf_token }}'
