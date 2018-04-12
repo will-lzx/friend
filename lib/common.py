@@ -2,6 +2,8 @@ import time
 
 import datetime
 
+from wechatpy import WeChatClient
+
 from friendplatform.settings import WEIXIN_APPID, WEIXIN_APPSECRET
 from lib.url_request import UrlRequest
 from weixin.models import Customer
@@ -31,3 +33,9 @@ def get_openid(code):
     url_req = UrlRequest()
     resp = url_req.url_request(url)
     return resp['openid']
+
+
+def get_user_info(openid):
+    client = WeChatClient(WEIXIN_APPID, WEIXIN_APPSECRET)
+    user = client.user.get(openid)
+    return user

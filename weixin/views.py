@@ -9,7 +9,7 @@ from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 
 from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE
-from lib.common import create_timestamp, subcribe_save_openid, get_openid
+from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info
 
 
 @csrf_exempt
@@ -53,13 +53,15 @@ def privatecenter(request):
     template_name = 'weixin/privatecenter.html'
 
     open_id = get_open_id(request)
-    headimgurl = ''
-    nickname = 'nickname'
+
+    user = get_user_info(open_id)
+    headimgurl = user['headimgurl']
+    nick_name = user['nickname']
 
     context = {
         'open_id': open_id,
         'headimgurl': headimgurl,
-        'nickname': nickname
+        'nickname': nick_name
     }
 
     response = render(request, template_name, context)
