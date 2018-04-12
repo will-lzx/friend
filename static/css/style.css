@@ -547,7 +547,5 @@ h4{font-size: 14px;color: #666666;font-weight: 400;text-align: center;padding: 1
 .sc_t{width: 72px;height: 72px;border: none;overflow: hidden;}
 .sc_top{margin-top: -1px;}
 
-
-/*-------监督目标------------*/
-.wk_con{margin: 120px auto;padding: 0 15px;text-align: center;line-height: 30px;color: #666666;}
-.wk_til{color: #ff6666;font-weight: bold;}
+.nr_con_all_pr{padding: 0;background-color:#f8f8f8;height:100%;}
+.gr_top{width:100%;height: auto;border-bottom: 1px solid #e5e5e5;text-align: center;line-height: 30px;background-color: white;padding-bottom: 30px;color: #999999;}
