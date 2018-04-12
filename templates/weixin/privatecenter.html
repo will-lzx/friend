@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="button-sp-area">
+    <div class="gr_top">
+       <img class="gr_tx" src="{{ headimgurl }}" alt="微信头像">
+       <div class="gr_nc">{{ nickname }}</div>
+
+       <span class="col_z">恋爱达人，小清新</span>
+   </div>
+
+    <div>
+        <a href="#" >个人信息预览</a>
+    </div>
+
+    <div>
+        <a href="#">导师互动</a>
+    </div>
+
+    <div>
         <a href="/weixin/join/" class="weui-btn weui-btn_mini weui-btn_primary">加入</a>
     </div>
+
 {% endblock %}

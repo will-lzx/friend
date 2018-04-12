@@ -53,9 +53,13 @@ def privatecenter(request):
     template_name = 'weixin/privatecenter.html'
 
     open_id = get_open_id(request)
+    headimgurl = ''
+    nickname = 'nickname'
 
     context = {
         'open_id': open_id,
+        'headimgurl': headimgurl,
+        'nickname': nickname
     }
 
     response = render(request, template_name, context)
