@@ -24,14 +24,34 @@
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" name="issue" placeholder="请输入建议或反馈" rows="3"></textarea>
-                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                    <textarea class="weui-textarea" name="issue" placeholder="请输入建议或反馈" required rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span id="wordCountShow"></span></div>
                 </div>
             </div>
         </div>
 
-
-        <input class="weui-btn weui-btn_primary" type="submit" value="下一步">
+        <input class="weui-btn weui-btn_primary" type="submit" value="save">
 
     </form>
+
+    <script>
+        $.fn.extend({
+            wordCount: function (maxLength, wordWrapper) {
+              var self = this;
+              $(self).attr("maxlength", maxLength);
+              showWordCount();
+              $(this).on("input propertychange", showWordCount);
+              function showWordCount() {
+                curLength = $(self).val().length;
+                var leaveCount = maxLength - curLength;
+                wordWrapper.text(leaveCount + "/" + maxLength);
+                if(leaveCount === 0)
+                {
+                    $('#wordCountShow').css({color:"red"});
+                }
+
+              }
+            }
+          });
+    </script>
 {% endblock %}
