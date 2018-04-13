@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form id="fm" action="/weixin/save_issue/" method="post" style="margin:0;padding:10px">
+
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>建议与反馈</p>
+            </div>
+{#            <div class="weui-cell__ft">说明文字</div>#}
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="issue-type">
+                        <option value="1">建议</option>
+                        <option value="2">问题反馈</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" name="issue" placeholder="请输入建议或反馈" rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/200</div>
+                </div>
+            </div>
+        </div>
+
+
+        <input class="weui-btn weui-btn_primary" type="submit" value="下一步">
+
+    </form>
+{% endblock %}

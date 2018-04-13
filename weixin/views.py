@@ -1,3 +1,4 @@
+import datetime
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -10,6 +11,7 @@ from wechatpy.utils import check_signature
 
 from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info
+from weixin.models import Issue
 
 
 @csrf_exempt
@@ -168,6 +170,49 @@ def join2(request):
         }
         response = render(request, template_name, context)
         return response
+
+
+@csrf_exempt
+def issue(request):
+    template_name = 'weixin/issue.html'
+
+    open_id = get_open_id(request)
+
+    context = {
+        'open_id': open_id
+    }
+
+    response = render(request, template_name, context)
+    return response
+
+
+@csrf_exempt
+def save_issue(request):
+    open_id = get_open_id(request)
+    if request.method == 'POST':
+        issue_type = request.POST.get('issue-type', None)
+        description = request.POST.get('issue', None)
+
+        issue_dict = {'issue_type': issue_type,
+                      'description': description,
+                      'owner': open_id,
+                      'createtime': datetime.datetime.now()}
+
+        try:
+            Issue.objects.create(**issue_dict)
+        except Exception as ex:
+            print(str(ex))
+            return HttpResponse('fail')
+
+        return HttpResponse('success')
+
+
+@csrf_exempt
+def about(request):
+    template_name = 'weixin/about.html'
+
+    response = render(request, template_name)
+    return response
 
 
 @csrf_exempt

@@ -27,5 +27,8 @@ urlpatterns = [
     url(r'^join/$', views.join, name='join'),
     url(r'^join2/$', views.join2, name='join2'),
     url(r'^upload/$', views.upload, name='upload'),
+    url(r'^about/$', views.about, name='about'),
+    url(r'^issue/$', views.issue, name='issue'),
+    url(r'^save_issue/$', views.save_issue, name='save_issue'),
 
 ]

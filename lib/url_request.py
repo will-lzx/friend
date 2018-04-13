@@ -78,7 +78,22 @@ class UrlRequest:
                             "name": "个人中心",
                             "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fprivatecenter%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(WEIXIN_APPID)
                             #"url": "http://182.61.21.208/weixin/others/"
+                        },
+                        {
+                            "type": "view",
+                            "name": "建议与反馈",
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fissue%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(
+                                WEIXIN_APPID)
+                            # "url": "http://182.61.21.208/weixin/create1/"
+                        },
+                        {
+                            "type": "view",
+                            "name": "关于我们",
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fabout%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(
+                                WEIXIN_APPID)
+                            # "url": "http://182.61.21.208/weixin/create1/"
                         }
+
                     ]
                 }]
         }
