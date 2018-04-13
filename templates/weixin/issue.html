@@ -35,17 +35,16 @@
     </form>
 
     <script>
-        function LimitedWordsNum() {
-                $('#doctorIntroduction').keydown(function() {
-                    var curLength = $('#issue').val().length;
-                    if(curLength >= 150) {
-                        var num = $('#issue').val().substr(0, 150);
-                        $('#issue').val(num);
-                        $.weui.alert('超字数限制，多出的字符将被截断！');
-                    } else {
-                        $('.textareaLength').text(curLength);
-                    }
-                })
+        $('#issue').bind('input propertychange', function () {
+            var fizeNum = $(this).val().length;
+            if (fizeNum > 150) {
+                var char = $(this).val();
+                char = char.substr(0, 150);
+                $(this).val(char);
+                fizeNum = 150;
+                $.weui.alert('消息内容不能超过150字');
             }
+            $(this).parent().find('#textareaLength').text(fizeNum);
+        })
     </script>
 {% endblock %}
