@@ -1,5 +1,5 @@
 import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -202,14 +202,22 @@ def save_issue(request):
             Issue.objects.create(**issue_dict)
         except Exception as ex:
             print(str(ex))
-            return HttpResponse('fail')
+            return HttpResponseRedirect('/weixin/exception/')
 
-        return HttpResponse('success')
+        return HttpResponseRedirect('/weixin/privatecenter/')
 
 
 @csrf_exempt
 def about(request):
     template_name = 'weixin/about.html'
+
+    response = render(request, template_name)
+    return response
+
+
+@csrf_exempt
+def exception(request):
+    template_name = 'weixin/exception.html'
 
     response = render(request, template_name)
     return response
