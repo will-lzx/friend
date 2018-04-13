@@ -20,3 +20,5 @@ body{
 
 .nr_con_all_pr{padding: 10px;background-color:#f8f8f8;}
 .gr_top{width:100%;height: auto;border-bottom: 1px solid #e5e5e5;text-align: center;line-height: 30px;background-color: white;padding-bottom: 30px;color: #999999;}
+
+.issue-title{margin: 0 auto;}
