@@ -172,7 +172,6 @@ def coordinate(request):
     return response
 
 
-
 @csrf_exempt
 def join2(request):
     template_name = 'weixin/join2.html'
