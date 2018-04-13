@@ -24,34 +24,28 @@
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" name="issue" placeholder="请输入建议或反馈" required rows="3"></textarea>
-                    <div class="weui-textarea-counter"><span id="wordCountShow"></span></div>
+                    <textarea class="weui-textarea" id="issue" name="issue" placeholder="请输入建议或反馈" required rows="3"></textarea>
+                    <div class="weui-textarea-counter"><span id="textareaLength">0</span>/150</div>
                 </div>
             </div>
         </div>
 
-        <input class="weui-btn weui-btn_primary" type="submit" value="save">
+        <input class="weui-btn weui-btn_primary" type="submit" value="保存">
 
     </form>
 
     <script>
-        $.fn.extend({
-            wordCount: function (maxLength, wordWrapper) {
-              var self = this;
-              $(self).attr("maxlength", maxLength);
-              showWordCount();
-              $(this).on("input propertychange", showWordCount);
-              function showWordCount() {
-                curLength = $(self).val().length;
-                var leaveCount = maxLength - curLength;
-                wordWrapper.text(leaveCount + "/" + maxLength);
-                if(leaveCount === 0)
-                {
-                    $('#wordCountShow').css({color:"red"});
-                }
-
-              }
+        function LimitedWordsNum() {
+                $('#doctorIntroduction').keydown(function() {
+                    var curLength = $('#issue').val().length;
+                    if(curLength >= 150) {
+                        var num = $('#issue').val().substr(0, 150);
+                        $('#issue').val(num);
+                        $.weui.alert('超字数限制，多出的字符将被截断！');
+                    } else {
+                        $('.textareaLength').text(curLength);
+                    }
+                })
             }
-          });
     </script>
 {% endblock %}
