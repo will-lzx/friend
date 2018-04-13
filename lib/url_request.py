@@ -81,6 +81,13 @@ class UrlRequest:
                         },
                         {
                             "type": "view",
+                            "name": "商务合作",
+                            "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fcoordinate%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(
+                                WEIXIN_APPID)
+                            # "url": "http://182.61.21.208/weixin/create1/"
+                        },
+                        {
+                            "type": "view",
                             "name": "建议与反馈",
                             "url": "https://open.weixin.qq.com/connect/oauth2/authorize?appid={}&redirect_uri=http%3A%2F%2Frelalive.com%2Fweixin%2Fissue%2F&response_type=code&scope=snsapi_base&state=123&connect_redirect=1#wechat_redirect".format(
                                 WEIXIN_APPID)

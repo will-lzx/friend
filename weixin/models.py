@@ -20,21 +20,6 @@ class Activity(models.Model):
     updatetime = models.DateTimeField(auto_now=True)
 
 
-class Expert(models.Model):
-    id = models.IntegerField(primary_key=True, auto_created=True)
-    name = models.CharField(max_length=20)
-    phone_number = models.CharField(max_length=11, default='')
-    weixin_qq = models.CharField(max_length=100, default='')
-    sex = models.IntegerField()
-    birth = models.DateTimeField()
-    location = models.CharField(max_length=20)
-    grade = models.IntegerField(default=0)
-    online = models.BooleanField(default=False)
-    description = models.TextField()
-    createtime = models.DateTimeField()
-    updatetime = models.DateTimeField(auto_now=True)
-
-
 class Member(models.Model):
     id = models.IntegerField(primary_key=True, auto_created=True)
     name = models.CharField(max_length=20)
@@ -44,6 +29,22 @@ class Member(models.Model):
     birth = models.DateTimeField()
     location = models.CharField(max_length=20)
     description = models.TextField()
+    createtime = models.DateTimeField()
+    updatetime = models.DateTimeField(auto_now=True)
+
+
+class Expert(models.Model):
+    id = models.IntegerField(primary_key=True, auto_created=True)
+    member = models.ForeignKey(Member, on_delete=True, default=None)
+    grade = models.IntegerField(default=0)
+    online = models.BooleanField(default=False)
+    createtime = models.DateTimeField()
+    updatetime = models.DateTimeField(auto_now=True)
+
+
+class StudyMember(models.Model):
+    id = models.IntegerField(primary_key=True, auto_created=True)
+    member = models.ForeignKey(Member, on_delete=True, default=None)
     # 0: not any member, 1: friend member, 2: study member
     member_type = models.IntegerField()
     createtime = models.DateTimeField()

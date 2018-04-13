@@ -109,10 +109,7 @@ def expert(request):
     return response
 
 
-def join(request):
-    template_name = 'weixin/join.html'
-
-    open_id = get_open_id(request)
+def join(member_type, open_id):
     years = {}
     months = {}
     days = {}
@@ -132,6 +129,7 @@ def join(request):
         days[i+1] = start_value + i
 
     context = {
+        'member_type': member_type,
         'open_id': open_id,
         'years': years,
         'months': months,
@@ -139,8 +137,40 @@ def join(request):
         'number_type': NUMBER_TYPE
     }
 
+    return context
+
+
+def expert_join(request):
+    template_name = 'weixin/join.html'
+    open_id = get_open_id(request)
+
+    member_type = 0
+    context = join(member_type, open_id)
+
     response = render(request, template_name, context)
     return response
+
+
+def member_join(request):
+    template_name = 'weixin/join.html'
+    open_id = get_open_id(request)
+
+    member_type = 1
+    context = join(member_type, open_id)
+
+    response = render(request, template_name, context)
+    return response
+
+
+def coordinate(request):
+    template_name = 'weixin/coordinate.html'
+    open_id = get_open_id(request)
+
+    context = {}
+
+    response = render(request, template_name, context)
+    return response
+
 
 
 @csrf_exempt
@@ -156,6 +186,10 @@ def join2(request):
         birth_year = request.POST.get('birth-year', None)
         birth_month = request.POST.get('birth-month', None)
         birth_day = request.POST.get('birth-day', None)
+
+        member_dict = {
+            ''
+        }
 
         context = {
             'name': name,

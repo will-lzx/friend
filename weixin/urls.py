@@ -24,7 +24,9 @@ urlpatterns = [
     url(r'^beauty/$', views.beauty, name='beauty'),
     url(r'^expert/$', views.expert, name='expert'),
 
-    url(r'^join/$', views.join, name='join'),
+    url(r'^coordinate/$', views.coordinate, name='coordinate'),
+    url(r'^member_join/$', views.member_join, name='member_join'),
+    url(r'^expert_join/$', views.expert_join, name='expert_join'),
     url(r'^join2/$', views.join2, name='join2'),
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^about/$', views.about, name='about'),
