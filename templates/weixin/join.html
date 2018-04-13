@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <form id="fm" action="/weixin/join2/" method="post" style="margin:0;padding:10px">
+    <form id="fm" action="/weixin/save_member/" method="post" style="margin:0;padding:10px">
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
@@ -73,12 +73,12 @@
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
-                    <select class="weui-select" name="number-location">
+                    <select class="weui-select" name="city">
                         <option value="1">城市</option>
                     </select>
                 </div>
                 <div class="weui-cell__bd">
-                  <input class="weui-input" id="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110000">
+                  <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110000">
                 </div>
             </div>
         </div>

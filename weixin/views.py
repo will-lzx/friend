@@ -11,7 +11,7 @@ from wechatpy.utils import check_signature
 
 from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info
-from weixin.models import Issue
+from weixin.models import Issue, Member
 
 
 @csrf_exempt
@@ -173,8 +173,9 @@ def coordinate(request):
 
 
 @csrf_exempt
-def join2(request):
+def save_member(request):
     template_name = 'weixin/join2.html'
+    open_id = get_open_id(request)
     if request.method == 'POST':
         name = request.POST.get('name', None)
         sex = request.POST.get('sex', None)
@@ -185,12 +186,39 @@ def join2(request):
         birth_year = request.POST.get('birth-year', None)
         birth_month = request.POST.get('birth-month', None)
         birth_day = request.POST.get('birth-day', None)
+        home_city = request.POST.get('home-city', None)
 
         member_dict = {
-            ''
+            'name': name,
+            'phone_number': phone_number,
+            'weixin_qq': number_type,
+            'sex': sex,
+            'birth': datetime.datetime.strptime(str(birth_year) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d'),
+            'location': home_city,
+            'createtime': datetime.datetime.now(),
+            'open_id': open_id
         }
 
+        try:
+            member_exist = Member.objects.filter(open_id=open_id)
+            if member_exist:
+                template_name = 'weixin/exception.html'
+                context = {
+                    'exception': '已是会员，无法再次加入'
+                }
+                response = render(request, template_name, context)
+                return response
+            Member.objects.create(**member_dict)
+        except Exception as ex:
+            print('create member exception, ', str(ex))
+            context = {
+                'exception': str(ex)
+            }
+            response = render(request, template_name, context)
+            return response
+
         context = {
+            'home_city': home_city,
             'name': name,
             'sex': sex,
             'number_type': number_type,

@@ -28,7 +28,7 @@ class Member(models.Model):
     sex = models.IntegerField()
     birth = models.DateTimeField()
     location = models.CharField(max_length=20)
-    description = models.TextField()
+    open_id = models.CharField(max_length=200, default='')
     createtime = models.DateTimeField()
     updatetime = models.DateTimeField(auto_now=True)
 
@@ -37,6 +37,7 @@ class Expert(models.Model):
     id = models.IntegerField(primary_key=True, auto_created=True)
     member = models.ForeignKey(Member, on_delete=True, default=None)
     grade = models.IntegerField(default=0)
+    description = models.TextField(default='')
     online = models.BooleanField(default=False)
     createtime = models.DateTimeField()
     updatetime = models.DateTimeField(auto_now=True)
@@ -47,6 +48,7 @@ class StudyMember(models.Model):
     member = models.ForeignKey(Member, on_delete=True, default=None)
     # 0: not any member, 1: friend member, 2: study member
     member_type = models.IntegerField()
+    description = models.TextField(default='')
     createtime = models.DateTimeField()
     updatetime = models.DateTimeField(auto_now=True)
 
