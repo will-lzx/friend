@@ -191,7 +191,7 @@ def save_member(request):
         member_dict = {
             'name': name,
             'phone_number': phone_number,
-            'weixin_qq': number_type,
+            'weixin_qq': number_type + ':' + number,
             'sex': sex,
             'birth': datetime.datetime.strptime(str(START_YEAR - int(birth_year) + 1) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d'),
             'location': home_city,
