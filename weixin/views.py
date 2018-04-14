@@ -187,7 +187,6 @@ def save_member(request):
         birth_month = request.POST.get('birth-month', None)
         birth_day = request.POST.get('birth-day', None)
         home_city = request.POST.get('home-city', None)
-        open_id = ''
         member_dict = {
             'name': name,
             'phone_number': phone_number,
