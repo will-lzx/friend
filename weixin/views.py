@@ -9,7 +9,7 @@ from wechatpy.events import SubscribeEvent
 from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 
-from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE
+from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info
 from weixin.models import Issue, Member
 
@@ -113,7 +113,7 @@ def join(member_type, open_id):
     years = {}
     months = {}
     days = {}
-    start_value = 2030
+    start_value = START_YEAR
 
     for i in range(80):
         years[i+1] = start_value - i
@@ -193,7 +193,7 @@ def save_member(request):
             'phone_number': phone_number,
             'weixin_qq': number_type,
             'sex': sex,
-            'birth': datetime.datetime.strptime(str(birth_year) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d'),
+            'birth': datetime.datetime.strptime(str(START_YEAR - int(birth_year) + 1) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d'),
             'location': home_city,
             'createtime': datetime.datetime.now(),
             'open_id': open_id
