@@ -187,7 +187,7 @@ def save_member(request):
         birth_month = request.POST.get('birth-month', None)
         birth_day = request.POST.get('birth-day', None)
         home_city = request.POST.get('home-city', None)
-
+        open_id = ''
         member_dict = {
             'name': name,
             'phone_number': phone_number,
@@ -210,6 +210,7 @@ def save_member(request):
                 return response
             Member.objects.create(**member_dict)
         except Exception as ex:
+            template_name = 'weixin/exception.html'
             print('create member exception, ', str(ex))
             context = {
                 'exception': str(ex)
@@ -218,16 +219,7 @@ def save_member(request):
             return response
 
         context = {
-            'home_city': home_city,
-            'name': name,
-            'sex': sex,
-            'number_type': number_type,
-            'number': number,
-            'number_location': number_location,
-            'phone_number': phone_number,
-            'birth_year': birth_year,
-            'birth_month': birth_month,
-            'birth_day': birth_day
+
         }
         response = render(request, template_name, context)
         return response
