@@ -11,7 +11,7 @@ from wechatpy.utils import check_signature
 
 from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info
-from weixin.models import Issue, Member
+from weixin.models import Issue, Member, Pic, Expert, StudyMember
 
 
 @csrf_exempt
@@ -187,6 +187,7 @@ def save_member(request):
         birth_month = request.POST.get('birth-month', None)
         birth_day = request.POST.get('birth-day', None)
         home_city = request.POST.get('home-city', None)
+        member_type = request.POST.get('member_type', None)
         member_dict = {
             'name': name,
             'phone_number': phone_number,
@@ -195,7 +196,7 @@ def save_member(request):
             'birth': datetime.datetime.strptime(str(START_YEAR - int(birth_year) + 1) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d'),
             'location': home_city,
             'createtime': datetime.datetime.now(),
-            'open_id': open_id
+            'open_id': open_id,
         }
 
         try:
@@ -218,10 +219,37 @@ def save_member(request):
             return response
 
         context = {
-
+            'member_type': member_type
         }
         response = render(request, template_name, context)
         return response
+
+
+def test(request):
+    template_name = 'weixin/join2.html'
+
+    context = {
+
+    }
+    response = render(request, template_name, context)
+    return response
+
+
+@csrf_exempt
+def detail_submit(request):
+    open_id = get_open_id(request)
+    if request.method == 'POST':
+        member_type = request.POST.get('member_type', None)
+        description = request.POST.get('description', None)
+
+        member = Member.objects.filter(open_id=open_id)
+        if member:
+            if int(member_type) == 0:
+                Expert.objects.filter(member__id=member.id).update(description=description)
+            else:
+                StudyMember.objects.filter(member__id=member.id).update(description=description)
+
+    return HttpResponseRedirect('/weixin/privatecenter')
 
 
 @csrf_exempt
@@ -278,6 +306,29 @@ def exception(request):
 @csrf_exempt
 def upload(request):
     return HttpResponse('')
+
+
+@csrf_exempt
+def save_image(request):
+    open_id = get_open_id(request)
+    binary = request.POST.get('img_src', None)
+
+    pics = Pic.objects.filter(own_id=open_id)
+
+    createtime = datetime.datetime.now()
+
+    pics_len = len(pics)
+    pic_dict = {
+        'index': pics_len + 1,
+        'binary': binary,
+        'own_id': open_id,
+        'createtime': createtime
+    }
+    try:
+        Pic.objects.create(**pic_dict)
+    except Exception as ex:
+        return HttpResponse('fail')
+    return HttpResponse('success')
 
 
 def beauty(request):

@@ -28,7 +28,13 @@ urlpatterns = [
     url(r'^member_join/$', views.member_join, name='member_join'),
     url(r'^expert_join/$', views.expert_join, name='expert_join'),
     url(r'^save_member/$', views.save_member, name='save_member'),
+    url(r'^detail_submit/$', views.detail_submit, name='detail_submit'),
+
+    url(r'^test/$', views.test, name='test'),
+
     url(r'^upload/$', views.upload, name='upload'),
+    url(r'^save_image/$', views.save_image, name='save_image'),
+
     url(r'^about/$', views.about, name='about'),
     url(r'^issue/$', views.issue, name='issue'),
     url(r'^save_issue/$', views.save_issue, name='save_issue'),

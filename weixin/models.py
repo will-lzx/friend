@@ -55,8 +55,9 @@ class StudyMember(models.Model):
 
 class Pic(models.Model):
     id = models.IntegerField(primary_key=True, auto_created=True)
-    main_id = models.IntegerField()
+    index = models.IntegerField()
     binary = models.BinaryField()
+    own_id = models.CharField(max_length=200, default='')
     createtime = models.DateTimeField()
     updatetime = models.DateTimeField(auto_now=True)
 
