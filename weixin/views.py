@@ -36,7 +36,9 @@ def wx(request):
         elif msg.type == 'event':
             subcribe_event = SubscribeEvent(msg)
             if msg.event == subcribe_event.event:
-                reply_msg = '欢迎来到，全球高端白领交友平台，我们终于等到你了'
+                pic_info = 'https://mp.weixin.qq.com/s?__biz=MzU1MjcxODI1Nw==&tempkey=OTUzXzZnUzl1Nzh1YzQ1aGJvRVRPT1o0dHhkZ0cta1JRdVhZSzZEQkd2ZlVXQWNaZjlUOFdvTDExRnRCdWZ1T1otaEllSFE4Y3hGaGtpZGcwbmRZY3RYOE5WSUNyZ3JvdTRKemdiUXlETmF6RnN6T0xuRmVfdkliRUdwZWFQbHAybTV5OGM2ZW1tNHFqZGVzSVU2eHRUUTNHZXdqLTVibkd3RWRGZGxkVGd%2Bfg%3D%3D&chksm=7bfc9bdc4c8b12ca3894308e4b1fff2dbc07e8b68a87243d1e95a251b15291edff8185c27497#rd'
+                reply_content = '欢迎来到，全球高端白领交友平台，我们终于等到你了'
+                reply_msg = [reply_content, pic_info]
                 reply = create_reply(reply_msg, msg)
                 openid = msg.source
                 subcribe_save_openid(openid)
