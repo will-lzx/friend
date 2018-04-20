@@ -12,6 +12,9 @@ from wechatpy.utils import check_signature
 from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info
 from weixin.models import Issue, Member, Pic, Expert, StudyMember
+import logging
+
+log = logging.getLogger('django')
 
 
 @csrf_exempt
@@ -40,6 +43,7 @@ def wx(request):
                 reply_content = '欢迎来到，全球高端白领交友平台，我们终于等到你了'
                 reply_msg = [reply_content, pic_info]
                 reply = create_reply(reply_msg, msg)
+                log.info('create reply successfully')
                 openid = msg.source
                 subcribe_save_openid(openid)
             else:
@@ -50,7 +54,8 @@ def wx(request):
 
         return response
     else:
-        print('error')
+        log.info('error')
+        return 'error'
 
 
 def privatecenter(request):
