@@ -39,7 +39,9 @@ def wx(request):
                              "<MsgType><![CDATA[text]]></MsgType>" \
                              "<Content><![CDATA[{}]]></Content></xml>"
 
-            reply = reply_template.format(msg.source, msg.target, str(create_timestamp()), 'text')
+            content = '公众号首页暂不支持自动回复客服消息，请转到-我的->建议与反馈中留言，给您带来的不便，敬请谅解'
+
+            reply = reply_template.format(msg.source, msg.target, str(create_timestamp()), content)
             return HttpResponse(reply, content_type="application/xml")
         elif msg.type == 'event':
             subcribe_event = SubscribeEvent(msg)
