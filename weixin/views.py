@@ -33,8 +33,13 @@ def wx(request):
     if request.method == 'POST':
         msg = parse_message(request.body)
         if msg.type == 'text' or msg.type == 'image' or msg.type == 'voice':
-            reply = '<xml><ToUserName><![CDATA[' + msg.source + ']]></ToUserName><FromUserName><![CDATA[' + msg.target + \
-                    ']]></FromUserName><CreateTime>' + str(create_timestamp()) + '</CreateTime><MsgType><![CDATA[transfer_customer_service]]></MsgType></xml>'
+            reply_template = "<xml><ToUserName><![CDATA[{}]]></ToUserName>" \
+                             "<FromUserName><![CDATA[{}]]></FromUserName>" \
+                             "<CreateTime>{}</CreateTime>" \
+                             "<MsgType><![CDATA[text]]></MsgType>" \
+                             "<Content><![CDATA[{}]]></Content></xml>"
+
+            reply = reply_template.format(msg.source, msg.target, str(create_timestamp()), 'text')
             return HttpResponse(reply, content_type="application/xml")
         elif msg.type == 'event':
             subcribe_event = SubscribeEvent(msg)
