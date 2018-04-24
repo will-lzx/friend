@@ -68,10 +68,11 @@ def privatecenter(request):
 
     open_id = get_open_id(request)
 
-    user = get_user_info(open_id)
-    headimgurl = user['headimgurl']
-    nick_name = user['nickname']
-
+    #user = get_user_info(open_id)
+    #headimgurl = user['headimgurl']
+    #nick_name = user['nickname']
+    headimgurl = ''
+    nick_name = 'test'
     context = {
         'open_id': open_id,
         'headimgurl': headimgurl,
@@ -256,10 +257,27 @@ def detail_submit(request):
 
         member = Member.objects.filter(open_id=open_id)
         if member:
+
             if int(member_type) == 0:
-                Expert.objects.filter(member__id=member.id).update(description=description)
+                expert_dict = {
+                    'grade': 3,
+                    'online': 1,
+                    'member_id': member.first().id,
+                    'description': description,
+                    'createtime': datetime.datetime.now()
+                }
+                Expert.objects.create(**expert_dict)
             else:
-                StudyMember.objects.filter(member__id=member.id).update(description=description)
+                study_dict = {
+                    'member_id': member.first().id,
+                    'description': description,
+                    'createtime': datetime.datetime.now(),
+                    'member_type': 0
+                }
+                StudyMember.objects.create(**study_dict)
+
+
+
 
     return HttpResponseRedirect('/weixin/privatecenter')
 
@@ -365,6 +383,8 @@ def get_open_id(request):
         print('save session', openid)
     else:
         openid = request.session.get('openid', default=None)
+        openid = 'test'
         print('session get', openid)
 
     return openid
+
