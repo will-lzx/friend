@@ -1,5 +1,7 @@
 import base64
 import datetime
+import io
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -14,6 +16,7 @@ from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info, is_studymember, \
     is_expertmember
 from weixin.models import Issue, Member, Pic, Expert, StudyMember
+from PIL import Image
 import logging
 
 log = logging.getLogger('django')
@@ -280,9 +283,6 @@ def detail_submit(request):
                 }
                 StudyMember.objects.create(**study_dict)
 
-
-
-
     return HttpResponseRedirect('/weixin/privatecenter')
 
 
@@ -343,8 +343,46 @@ def private(request):
 
     open_id = get_open_id(request)
 
-    response = render(request, template_name)
-    return response
+    member = Member.objects.filter(open_id=open_id)
+    if member:
+        member = member.first()
+        name = member.name
+        sex = member.sex
+        city = member.location
+        phoneNumber = member.phone_number
+        numbers = member.weixin_qq.split(':')
+        numberType = NUMBER_TYPE[numbers[0]]
+        number = numbers[1]
+
+        context = {
+            'name': name,
+            'sex': sex,
+            'city': city,
+            'phoneNumber': phoneNumber,
+            'numberType': numberType,
+            'number': number,
+            'memberType': '银牌会员'
+        }
+
+        response = render(request, template_name, context)
+        return response
+
+
+@csrf_exempt
+def show_image(request):
+    open_id = get_open_id(request)
+    image = Pic.objects.filter(own_id=open_id, index=1)
+
+    if image:
+        image = image.first().image
+
+        pic = io.BytesIO()
+        image_string = io.BytesIO(base64.b64decode(image))
+
+        image = Image.open(image_string)
+        image.save(pic, image.format, quality=100)
+        pic.seek(0)
+        return HttpResponse(pic, content_type='image/jpeg')
 
 
 @csrf_exempt
