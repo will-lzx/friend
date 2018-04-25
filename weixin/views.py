@@ -343,6 +343,9 @@ def private(request):
         numbers = member.weixin_qq.split(':')
         numberType = NUMBER_TYPE[int(numbers[0])]
         number = numbers[1]
+        image = Pic.objects.filter(own_id=open_id, index=1)
+        if image:
+            image = image.first().binary
 
         context = {
             'name': name,
@@ -351,28 +354,12 @@ def private(request):
             'phoneNumber': phoneNumber,
             'numberType': numberType,
             'number': number,
-            'memberType': '银牌会员'
+            'memberType': '银牌会员',
+            'image': image
         }
 
         response = render(request, template_name, context)
         return response
-
-
-@csrf_exempt
-def show_image(request):
-    open_id = get_open_id(request)
-    image = Pic.objects.filter(own_id=open_id, index=1)
-
-    if image:
-        image = image.first().binary
-
-        pic = io.BytesIO()
-        image_string = io.BytesIO(base64.b64decode(image))
-
-        image = Image.open(image_string)
-        image.save(pic, image.format, quality=100)
-        pic.seek(0)
-        return HttpResponse(image, content_type='image/jpeg')
 
 
 @csrf_exempt

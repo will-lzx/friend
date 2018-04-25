@@ -38,6 +38,5 @@ urlpatterns = [
     url(r'^exception/$', views.exception, name='exception'),
 
     url(r'^private/$', views.private, name='private'),
-    url(r'^show_image/$', views.show_image, name='show_image'),
 
 ]
