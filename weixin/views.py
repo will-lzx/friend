@@ -1,3 +1,4 @@
+import base64
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -351,7 +352,7 @@ def save_image(request):
     pics_len = len(pics)
     pic_dict = {
         'index': pics_len + 1,
-        'binary': binary,
+        'binary': base64.b64encode(binary),
         'own_id': open_id,
         'createtime': createtime
     }
