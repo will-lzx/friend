@@ -338,6 +338,16 @@ def exception(request):
 
 
 @csrf_exempt
+def private(request):
+    template_name = 'weixin/private.html'
+
+    open_id = get_open_id(request)
+
+    response = render(request, template_name)
+    return response
+
+
+@csrf_exempt
 def upload(request):
     return HttpResponse('')
 

@@ -40,4 +40,6 @@ urlpatterns = [
     url(r'^save_issue/$', views.save_issue, name='save_issue'),
     url(r'^exception/$', views.exception, name='exception'),
 
+    url(r'^private/$', views.private, name='private'),
+
 ]
