@@ -11,7 +11,8 @@ from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 
 from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR
-from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info
+from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info, is_studymember, \
+    is_expertmember
 from weixin.models import Issue, Member, Pic, Expert, StudyMember
 import logging
 
@@ -72,10 +73,14 @@ def privatecenter(request):
     user = get_user_info(open_id)
     headimgurl = user['headimgurl']
     nick_name = user['nickname']
+    is_member = is_studymember(open_id)
+    is_expert = is_expertmember(open_id)
     context = {
         'open_id': open_id,
         'headimgurl': headimgurl,
-        'nickname': nick_name
+        'nickname': nick_name,
+        'is_member': is_member,
+        'is_expert': is_expert
     }
 
     response = render(request, template_name, context)

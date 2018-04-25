@@ -6,7 +6,7 @@ from wechatpy import WeChatClient
 
 from friendplatform.settings import WEIXIN_APPID, WEIXIN_APPSECRET
 from lib.url_request import UrlRequest
-from weixin.models import Customer
+from weixin.models import Customer, StudyMember, Member, Expert
 
 
 def create_timestamp():
@@ -39,3 +39,21 @@ def get_user_info(openid):
     client = WeChatClient(WEIXIN_APPID, WEIXIN_APPSECRET)
     user = client.user.get(openid)
     return user
+
+
+def is_studymember(openid):
+    member = Member.objects.filter(open_id=openid)
+    if member:
+        studymember = StudyMember.objects.filter(member=member.first())
+        if studymember:
+            return True
+    return False
+
+
+def is_expertmember(openid):
+    member = Member.objects.filter(open_id=openid)
+    if member:
+        expert = Expert.objects.filter(member=member.first())
+        if expert:
+            return True
+    return False

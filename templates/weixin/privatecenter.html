@@ -27,21 +27,25 @@
         </div>
     </a>
 
-    <a class="weui-cell weui-cell_access" href="/weixin/member_join/">
-        <div class="weui-cell__bd">
-            <p>加入会员</p>
-        </div>
-        <div class="weui-cell__ft">
-        </div>
-    </a>
+    {% if not is_member %}
+        <a class="weui-cell weui-cell_access" href="/weixin/member_join/">
+            <div class="weui-cell__bd">
+                <p>加入会员</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+    {% endif %}
 
-    <a class="weui-cell weui-cell_access" href="/weixin/expert_join/">
-        <div class="weui-cell__bd">
-            <p>情感专家加盟</p>
-        </div>
-        <div class="weui-cell__ft">
-        </div>
-    </a>
+    {% if not is_expert %}
+        <a class="weui-cell weui-cell_access" href="/weixin/expert_join/">
+            <div class="weui-cell__bd">
+                <p>情感专家加盟</p>
+            </div>
+            <div class="weui-cell__ft">
+            </div>
+        </a>
+    {% endif %}
 
 
 {% endblock %}
