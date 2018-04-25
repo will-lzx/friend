@@ -351,7 +351,7 @@ def private(request):
         city = member.location
         phoneNumber = member.phone_number
         numbers = member.weixin_qq.split(':')
-        numberType = NUMBER_TYPE[numbers[0]]
+        numberType = NUMBER_TYPE[int(numbers[0])]
         number = numbers[1]
 
         context = {
