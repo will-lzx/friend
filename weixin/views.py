@@ -340,6 +340,7 @@ def upload(request):
 
 @csrf_exempt
 def save_image(request):
+    log.info('start save image...')
     open_id = get_open_id(request)
     binary = request.POST.get('img_src', None)
 
@@ -355,6 +356,7 @@ def save_image(request):
         'createtime': createtime
     }
     try:
+        log.info(' start create pic')
         Pic.objects.create(**pic_dict)
     except Exception as ex:
         return HttpResponse('fail')
