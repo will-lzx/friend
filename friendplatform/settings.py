@@ -138,6 +138,7 @@ WEIXIN_APPID = 'wx7829a34f247ea684'
 WEIXIN_APPSECRET = 'f471da2e5f2531c818fecac92676ab35'
 
 NUMBER_TYPE = {1: '微信号', 2: 'QQ号', 3: 'Email'}
+SEX = {1: '男', 2: '女'}
 START_YEAR = 2030
 
 

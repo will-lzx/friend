@@ -12,7 +12,7 @@ from wechatpy.events import SubscribeEvent
 from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 
-from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR
+from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR, SEX
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info, is_studymember, \
     is_expertmember
 from weixin.models import Issue, Member, Pic, Expert, StudyMember
@@ -245,16 +245,6 @@ def save_member(request):
         return response
 
 
-def test(request):
-    template_name = 'weixin/join2.html'
-
-    context = {
-
-    }
-    response = render(request, template_name, context)
-    return response
-
-
 @csrf_exempt
 def detail_submit(request):
     open_id = get_open_id(request)
@@ -356,7 +346,7 @@ def private(request):
 
         context = {
             'name': name,
-            'sex': sex,
+            'sex': SEX[int(sex)],
             'city': city,
             'phoneNumber': phoneNumber,
             'numberType': numberType,
@@ -376,13 +366,13 @@ def show_image(request):
     if image:
         image = image.first().binary
 
-        # pic = io.BytesIO()
-        # image_string = io.BytesIO(base64.b64decode(image.replace('data:image/png;base64,', '')))
-        #
-        # image = Image.open(image_string)
-        # image.save(pic, image.format, quality=100)
-        # pic.seek(0)
-        return HttpResponse(image)
+        pic = io.BytesIO()
+        image_string = io.BytesIO(base64.b64decode(image))
+
+        image = Image.open(image_string)
+        image.save(pic, image.format, quality=100)
+        pic.seek(0)
+        return HttpResponse(image, content_type='image/jpeg')
 
 
 @csrf_exempt
