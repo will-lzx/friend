@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div><img src="{{ image }}"></div>
+    <div><img src="{{ image }}" id="head"></div>
 
     <div>
         {{ name }}
@@ -49,4 +49,10 @@
         </div>
 
     </div>
+    <script>
+        $(document).ready(function(){
+            $("#view").css("width",document.body.clientWidth);
+
+        })
+    </script>
 {% endblock %}
