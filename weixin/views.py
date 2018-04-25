@@ -345,7 +345,7 @@ def private(request):
         number = numbers[1]
         image = Pic.objects.filter(own_id=open_id, index=1)
         if image:
-            image = image.first().binary
+            image = image.first().binary.decode()
             log.info(image)
 
         context = {
