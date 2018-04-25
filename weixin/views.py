@@ -376,13 +376,13 @@ def show_image(request):
     if image:
         image = image.first().binary
 
-        pic = io.BytesIO()
-        image_string = io.BytesIO(base64.b64decode(image.replace('data:image/png;base64,', '')))
-
-        image = Image.open(image_string)
-        image.save(pic, image.format, quality=100)
-        pic.seek(0)
-        return HttpResponse(pic, content_type='image/jpeg')
+        # pic = io.BytesIO()
+        # image_string = io.BytesIO(base64.b64decode(image.replace('data:image/png;base64,', '')))
+        #
+        # image = Image.open(image_string)
+        # image.save(pic, image.format, quality=100)
+        # pic.seek(0)
+        return HttpResponse(image)
 
 
 @csrf_exempt
