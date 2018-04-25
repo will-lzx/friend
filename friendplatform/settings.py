@@ -130,6 +130,8 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+
 
 WECHAT_TOKEN = 'friend'
 WEIXIN_APPID = 'wx7829a34f247ea684'
