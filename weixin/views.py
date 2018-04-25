@@ -342,6 +342,8 @@ def save_image(request):
     open_id = get_open_id(request)
     binary = request.POST.get('img_src', None)
 
+    log.info(binary)
+
     pics = Pic.objects.filter(own_id=open_id)
 
     createtime = datetime.datetime.now()
