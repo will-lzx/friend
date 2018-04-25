@@ -374,7 +374,7 @@ def show_image(request):
     image = Pic.objects.filter(own_id=open_id, index=1)
 
     if image:
-        image = image.first().image
+        image = image.first().binary
 
         pic = io.BytesIO()
         image_string = io.BytesIO(base64.b64decode(image))
