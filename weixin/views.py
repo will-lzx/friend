@@ -377,7 +377,7 @@ def show_image(request):
         image = image.first().binary
 
         pic = io.BytesIO()
-        image_string = io.BytesIO(base64.b64decode(image))
+        image_string = io.BytesIO(base64.b64decode(image.replace('data:image/png;base64,', '')))
 
         image = Image.open(image_string)
         image.save(pic, image.format, quality=100)
