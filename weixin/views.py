@@ -68,11 +68,9 @@ def privatecenter(request):
 
     open_id = get_open_id(request)
 
-    #user = get_user_info(open_id)
-    #headimgurl = user['headimgurl']
-    #nick_name = user['nickname']
-    headimgurl = ''
-    nick_name = 'test'
+    user = get_user_info(open_id)
+    headimgurl = user['headimgurl']
+    nick_name = user['nickname']
     context = {
         'open_id': open_id,
         'headimgurl': headimgurl,
