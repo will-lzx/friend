@@ -352,7 +352,7 @@ def save_image(request):
     pics_len = len(pics)
     pic_dict = {
         'index': pics_len + 1,
-        'binary': base64.b64encode(binary),
+        'binary': base64.urlsafe_b64encode(binary.encode('UTF-8')).decode('ascii'),
         'own_id': open_id,
         'createtime': createtime
     }
