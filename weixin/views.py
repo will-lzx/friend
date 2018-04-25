@@ -385,7 +385,6 @@ def get_open_id(request):
         print('save session', openid)
     else:
         openid = request.session.get('openid', default=None)
-        openid = 'test'
         print('session get', openid)
 
     return openid
