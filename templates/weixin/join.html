@@ -84,18 +84,18 @@
             </div>
         </div>
 
-        <div class="weui-cell">
-            <div class="weui-cell weui-cell_select weui-cell_select-before">
-
-                <div class="weui-cell__hd">
-                    <select class="weui-select" name="select2">
-                        <option value="1">生日</option>
-                    </select>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary" style="height: 100%">
-                    <input class="weui_select" type="date" value=""/>
-                </div>
-
+{#        <div class="weui-cell">#}
+{#            <div class="weui-cell weui-cell_select weui-cell_select-before">#}
+{##}
+{#                <div class="weui-cell__hd">#}
+{#                    <select class="weui-select" name="select2">#}
+{#                        <option value="1">生日</option>#}
+{#                    </select>#}
+{#                </div>#}
+{#                <div class="weui_cell_bd weui_cell_primary" style="height: 100%">#}
+{#                    <input class="weui_select" type="date" value=""/>#}
+{#                </div>#}
+{##}
 {#                <div style="padding: 20px">#}
 {#                    <div class="weui-cell__bd">#}
 {#                        <select class="weui-select" name="birth-year">#}
@@ -117,9 +117,20 @@
 {#                        </select>#}
 {#                    </div>#}
 {#                </div>#}
+{##}
+{#            </div>#}
+{#        </div>#}
 
-            </div>
+        <div class="weui_cells weui_cells_form">
+    <div class="weui_cell weui_cell_select weui_select_after">
+        <div class="weui_cell_hd">
+            生日
         </div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_select" type="date"/>
+        </div>
+    </div>
+</div>
 
         <label for="weuiAgree" class="weui-agree">
             <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" required>
