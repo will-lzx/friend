@@ -392,7 +392,7 @@ def beauty(request):
 
     last = Member.objects.filter(sex=sex).count() - 1
 
-    index = 0
+    index = 1
 
     select_member = Member.objects.filter(sex=sex)[index]
     v_open_id = select_member.open_id
