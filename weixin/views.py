@@ -248,7 +248,7 @@ def detail_submit(request):
 
         member = Member.objects.filter(open_id=open_id)
         if member:
-
+            log.info(member_type)
             if int(member_type) == 0:
                 expert_dict = {
                     'grade': 3,
