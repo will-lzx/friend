@@ -373,11 +373,14 @@ def save_image(request):
 
     createtime = datetime.datetime.now()
 
+    member_type = request.POST.get('member_type', None)
+
     pics_len = len(pics)
     pic_dict = {
         'index': pics_len + 1,
         'binary': binary.encode(),
-        'own_id': open_id,
+        'member_type': member_type,
+        'open_id': open_id,
         'createtime': createtime
     }
     try:

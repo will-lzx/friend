@@ -28,7 +28,7 @@ class Member(models.Model):
     sex = models.IntegerField()
     birth = models.DateTimeField()
     location = models.CharField(max_length=20)
-    open_id = models.CharField(max_length=200, default='')
+    open_id = models.CharField(max_length=200, default='', unique=True)
     createtime = models.DateTimeField()
     updatetime = models.DateTimeField(auto_now=True)
 
@@ -57,7 +57,8 @@ class Pic(models.Model):
     id = models.IntegerField(primary_key=True, auto_created=True)
     index = models.IntegerField()
     binary = models.BinaryField()
-    own_id = models.CharField(max_length=200, default='')
+    member_type = models.IntegerField(default=0)
+    open_id = models.CharField(max_length=200, default='')
     createtime = models.DateTimeField()
     updatetime = models.DateTimeField(auto_now=True)
 

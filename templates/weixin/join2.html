@@ -47,7 +47,7 @@
     </div>
 
     <div id="fileDiv" style="display: none"></div>
-    <input type="hidden" name="member_type" value="{{ member_type }}">
+    <input type="hidden" name="member_type" value="{{ member_type }}" id="member_type">
 
     <input class="weui-btn weui-btn_primary" type="submit" value="保存">
 
@@ -164,7 +164,8 @@
                 type:"post",
                 url:"/weixin/save_image/",//自己填写请求地址
                 data:{
-                    img_src: img_src
+                    img_src: img_src,
+                    member_type: $('#member_type').val()
                 },
                 success:function(result){
                     if(result === 'fail')
