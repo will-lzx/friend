@@ -183,6 +183,28 @@ def member_join(request):
     return response
 
 
+def show_member(request):
+    template_name = 'weixin/private.html'
+    open_id = get_open_id(request)
+
+    member_type = 1
+    context = join(member_type, open_id)
+
+    response = render(request, template_name, context)
+    return response
+
+
+def show_expert(request):
+    template_name = 'weixin/private.html'
+    open_id = get_open_id(request)
+
+    member_type = 1
+    context = join(member_type, open_id)
+
+    response = render(request, template_name, context)
+    return response
+
+
 def coordinate(request):
     template_name = 'weixin/coordinate.html'
     open_id = get_open_id(request)
@@ -340,6 +362,7 @@ def private(request):
         numbers = member.weixin_qq.split(':')
         numberType = NUMBER_TYPE[int(numbers[0])]
         number = numbers[1]
+
         image = Pic.objects.filter(open_id=open_id, index=1)
         if image:
             image = image.first().binary.decode()

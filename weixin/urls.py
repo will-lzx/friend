@@ -26,7 +26,11 @@ urlpatterns = [
 
     url(r'^coordinate/$', views.coordinate, name='coordinate'),
     url(r'^member_join/$', views.member_join, name='member_join'),
+    url(r'^show_member/$', views.show_member, name='show_member'),
+
     url(r'^expert_join/$', views.expert_join, name='expert_join'),
+    url(r'^show_expert/$', views.show_expert, name='show_expert'),
+
     url(r'^save_member/$', views.save_member, name='save_member'),
     url(r'^detail_submit/$', views.detail_submit, name='detail_submit'),
     url(r'^upload/$', views.upload, name='upload'),
