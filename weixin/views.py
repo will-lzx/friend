@@ -188,7 +188,7 @@ def show_member(request):
     open_id = get_open_id(request)
 
     member_type = 1
-    context = join(member_type, open_id)
+    context = get_private(open_id, member_type)
 
     response = render(request, template_name, context)
     return response
@@ -198,8 +198,8 @@ def show_expert(request):
     template_name = 'weixin/private.html'
     open_id = get_open_id(request)
 
-    member_type = 1
-    context = join(member_type, open_id)
+    member_type = 0
+    context = get_private(open_id, member_type)
 
     response = render(request, template_name, context)
     return response
@@ -347,43 +347,6 @@ def exception(request):
 
 
 @csrf_exempt
-def private(request):
-    template_name = 'weixin/private.html'
-
-    open_id = get_open_id(request)
-
-    member = Member.objects.filter(open_id=open_id)
-    if member:
-        member = member.first()
-        name = member.name
-        sex = member.sex
-        city = member.location
-        phoneNumber = member.phone_number
-        numbers = member.weixin_qq.split(':')
-        numberType = NUMBER_TYPE[int(numbers[0])]
-        number = numbers[1]
-
-        image = Pic.objects.filter(open_id=open_id, index=1)
-        if image:
-            image = image.first().binary.decode()
-            log.info(image)
-
-        context = {
-            'name': name,
-            'sex': SEX[int(sex)],
-            'city': city,
-            'phoneNumber': phoneNumber,
-            'numberType': numberType,
-            'number': number,
-            'memberType': '银牌会员',
-            'image': image
-        }
-
-        response = render(request, template_name, context)
-        return response
-
-
-@csrf_exempt
 def upload(request):
     return HttpResponse('')
 
@@ -440,4 +403,35 @@ def get_open_id(request):
         print('session get', openid)
 
     return openid
+
+
+def get_private(open_id, member_type):
+    member = Member.objects.filter(open_id=open_id)
+    if member:
+        member = member.first()
+        name = member.name
+        sex = member.sex
+        city = member.location
+        phoneNumber = member.phone_number
+        numbers = member.weixin_qq.split(':')
+        numberType = NUMBER_TYPE[int(numbers[0])]
+        number = numbers[1]
+
+        image = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
+        if image:
+            image = image.first().binary.decode()
+            log.info(image)
+
+        context = {
+            'name': name,
+            'sex': SEX[int(sex)],
+            'city': city,
+            'phoneNumber': phoneNumber,
+            'numberType': numberType,
+            'number': number,
+            'memberType': '银牌会员',
+            'image': image
+        }
+
+        return context
 
