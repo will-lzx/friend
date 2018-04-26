@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" required name="name" size="10" placeholder="请输入姓名">
+                    <input class="weui-input" type="text" required name="name" placeholder="请输入姓名">
                 </div>
             </div>
 
@@ -52,110 +52,70 @@
                 </div>
 
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" required name="number" size="50" placeholder="请输入号码">
+                    <input class="weui-input" type="text" required name="number" placeholder="请输入号码">
                 </div>
             </div>
 
         </div>
 
-{#        <div class="weui-cell">#}
-{#            <div class="weui-cell weui-cell_select weui-cell_select-before">#}
-{#                <div class="weui-cell__hd">#}
-{#                    <select class="weui-select" name="number-location">#}
-{#                        <option value="1">+86</option>#}
-{#                    </select>#}
-{#                </div>#}
-{#                <div class="weui-cell__bd">#}
-{#                    <input class="weui-input" type="number" required name="phone-number" size="11" pattern="[0-9]*" placeholder="请输入手机号码">#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-
-        <div class="weui_cells weui_cells_form">
-            <div class="weui_cell weui_cell_select weui_select_after">
-                <div class="weui_cell_hd">
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
                     <select class="weui-select" name="number-location">
                         <option value="1">+86</option>
                     </select>
                 </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui-input" type="number" required name="phone-number" size="11" pattern="[0-9]*" placeholder="请输入手机号码">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" required name="phone-number" pattern="[0-9]*" placeholder="请输入手机号码">
                 </div>
             </div>
+        </div>
 
-            <div class="weui_cell weui_cell_select weui_select_after">
-                <div class="weui_cell_hd">
-                    所在地
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="city">
+                        <option value="1">城市</option>
+                    </select>
                 </div>
-                <div class="weui_cell_bd weui_cell_primary">
+                <div class="weui-cell__bd">
                   <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110000">
                 </div>
             </div>
-
-            <div class="weui_cell weui_cell_select weui_select_after">
-                <div class="weui_cell_hd">
-                    生日
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_select" type="date"/>
-                </div>
-            </div>
-
-
-
         </div>
 
-{#        <div class="weui-cell">#}
-{#            <div class="weui-cell weui-cell_select weui-cell_select-before">#}
-{#                <div class="weui-cell__hd">#}
-{#                    <select class="weui-select" name="city">#}
-{#                        <option value="1">城市</option>#}
-{#                    </select>#}
-{#                </div>#}
-{#                <div class="weui-cell__bd">#}
-{#                  <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110000">#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
 
-{#        <div class="weui-cell">#}
-{#            <div class="weui-cell weui-cell_select weui-cell_select-before">#}
-{##}
-{#                <div class="weui-cell__hd">#}
-{#                    <select class="weui-select" name="select2">#}
-{#                        <option value="1">生日</option>#}
-{#                    </select>#}
-{#                </div>#}
-{#                <div class="weui_cell_bd weui_cell_primary" style="height: 100%">#}
-{#                    <input class="weui_select" type="date" value=""/>#}
-{#                </div>#}
-{##}
-{#                <div style="padding: 20px">#}
-{#                    <div class="weui-cell__bd">#}
-{#                        <select class="weui-select" name="birth-year">#}
-{#                            {% for k, v in years.items %}#}
-{#                                <option value="{{ k }}" {% ifequal k 30 %}selected{% endifequal %}>{{ v }}</option>#}
-{#                            {% endfor %}#}
-{#                        </select>#}
-{##}
-{#                        <select class="weui-select" name="birth-month">#}
-{#                            {% for k, v in months.items %}#}
-{#                                <option value="{{ k }}" >{{ v }}</option>#}
-{#                            {% endfor %}#}
-{#                        </select>#}
-{##}
-{#                        <select class="weui-select" name="birth-day">#}
-{#                            {% for k, v in days.items %}#}
-{#                                <option value="{{ k }}">{{ v }}</option>#}
-{#                            {% endfor %}#}
-{#                        </select>#}
-{#                    </div>#}
-{#                </div>#}
-{##}
-{#            </div>#}
-{#        </div>#}
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="select2">
+                        <option value="1">生日</option>
+                    </select>
+                </div>
+                <div style="padding: 20px">
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" name="birth-year">
+                            {% for k, v in years.items %}
+                                <option value="{{ k }}" {% ifequal k 30 %}selected{% endifequal %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
 
+                        <select class="weui-select" name="birth-month">
+                            {% for k, v in months.items %}
+                                <option value="{{ k }}" >{{ v }}</option>
+                            {% endfor %}
+                        </select>
 
+                        <select class="weui-select" name="birth-day">
+                            {% for k, v in days.items %}
+                                <option value="{{ k }}">{{ v }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <label for="weuiAgree" class="weui-agree">
             <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" required>
@@ -166,7 +126,7 @@
 
         <input class="weui-btn weui-btn_primary" type="submit" value="下一步">
 
-        <input type="hidden" name="member_type" value="{{ member_type }}">
+        <input>
     </form>
 
     <script>
