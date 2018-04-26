@@ -16,7 +16,6 @@ from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR, SEX
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info, is_studymember, \
     is_expertmember
 from weixin.models import Issue, Member, Pic, Expert, StudyMember
-from PIL import Image
 import logging
 
 log = logging.getLogger('django')
@@ -222,14 +221,8 @@ def save_member(request):
 
         try:
             member_exist = Member.objects.filter(open_id=open_id)
-            if member_exist:
-                template_name = 'weixin/exception.html'
-                context = {
-                    'exception': '已是会员，无法再次加入'
-                }
-                response = render(request, template_name, context)
-                return response
-            Member.objects.create(**member_dict)
+            if not member_exist:
+                Member.objects.create(**member_dict)
         except Exception as ex:
             template_name = 'weixin/exception.html'
             print('create member exception, ', str(ex))
