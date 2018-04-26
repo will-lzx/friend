@@ -126,6 +126,8 @@
                             ctx.drawImage(img, 0, 0, w, h);
                             var base64 = canvas.toDataURL('image/png');
 
+                            submit_image(base64);
+
                             // 插入到预览区
                             var $preview = $('<li class="weui_uploader_file weui_uploader_status" style="background-image:url(' + base64 + ')"><div class="weui_uploader_status_content">0%</div></li>');
                             $('.weui_uploader_files').append($preview);
@@ -151,8 +153,6 @@
                         };
 
                         img.src = e.target.result;
-                        submit_image(img.src);
-
                     };
                     reader.readAsDataURL(file);
                 }
