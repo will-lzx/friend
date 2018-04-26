@@ -221,7 +221,7 @@ def save_member(request):
         }
 
         try:
-            Member.objects.filter(open_id=open_id).update_or_create(**member_dict)
+            Member.objects.update_or_create(**member_dict, defaults={'open_id': open_id})
         except Exception as ex:
             template_name = 'weixin/exception.html'
             print('create member exception, ', str(ex))
@@ -336,7 +336,7 @@ def private(request):
         numbers = member.weixin_qq.split(':')
         numberType = NUMBER_TYPE[int(numbers[0])]
         number = numbers[1]
-        image = Pic.objects.filter(own_id=open_id, index=1)
+        image = Pic.objects.filter(open_id=open_id, index=1)
         if image:
             image = image.first().binary.decode()
             log.info(image)
@@ -366,10 +366,7 @@ def save_image(request):
     log.info('start save image...')
     open_id = get_open_id(request)
     binary = request.POST.get('img_src', None)
-
-    log.info(binary)
-
-    pics = Pic.objects.filter(own_id=open_id)
+    pics = Pic.objects.filter(open_id=open_id)
 
     createtime = datetime.datetime.now()
 
