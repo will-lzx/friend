@@ -58,17 +58,51 @@
 
         </div>
 
-        <div class="weui-cell">
-            <div class="weui-cell weui-cell_select weui-cell_select-before">
-                <div class="weui-cell__hd">
+{#        <div class="weui-cell">#}
+{#            <div class="weui-cell weui-cell_select weui-cell_select-before">#}
+{#                <div class="weui-cell__hd">#}
+{#                    <select class="weui-select" name="number-location">#}
+{#                        <option value="1">+86</option>#}
+{#                    </select>#}
+{#                </div>#}
+{#                <div class="weui-cell__bd">#}
+{#                    <input class="weui-input" type="number" required name="phone-number" size="11" pattern="[0-9]*" placeholder="请输入手机号码">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell weui_cell_select weui_select_after">
+                <div class="weui_cell_hd">
                     <select class="weui-select" name="number-location">
                         <option value="1">+86</option>
                     </select>
                 </div>
-                <div class="weui-cell__bd">
+                <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui-input" type="number" required name="phone-number" size="11" pattern="[0-9]*" placeholder="请输入手机号码">
                 </div>
             </div>
+
+            <div class="weui_cell weui_cell_select weui_select_after">
+                <div class="weui_cell_hd">
+                    所在地
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                  <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110000">
+                </div>
+            </div>
+
+            <div class="weui_cell weui_cell_select weui_select_after">
+                <div class="weui_cell_hd">
+                    生日
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_select" type="date"/>
+                </div>
+            </div>
+
+
+
         </div>
 
 {#        <div class="weui-cell">#}
@@ -83,17 +117,6 @@
 {#                </div>#}
 {#            </div>#}
 {#        </div>#}
-
-        <div class="weui_cells weui_cells_form">
-            <div class="weui_cell weui_cell_select weui_select_after">
-                <div class="weui_cell_hd">
-                    生日
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                  <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110000">
-                </div>
-            </div>
-        </div>
 
 {#        <div class="weui-cell">#}
 {#            <div class="weui-cell weui-cell_select weui-cell_select-before">#}
@@ -132,16 +155,7 @@
 {#            </div>#}
 {#        </div>#}
 
-        <div class="weui_cells weui_cells_form">
-            <div class="weui_cell weui_cell_select weui_select_after">
-                <div class="weui_cell_hd">
-                    生日
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_select" type="date"/>
-                </div>
-            </div>
-        </div>
+
 
         <label for="weuiAgree" class="weui-agree">
             <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" required>
