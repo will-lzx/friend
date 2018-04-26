@@ -154,7 +154,8 @@ def join(member_type, open_id):
         'years': years,
         'months': months,
         'days': days,
-        'number_type': NUMBER_TYPE
+        'number_type': NUMBER_TYPE,
+        'sex': SEX
     }
 
     return context
