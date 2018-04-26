@@ -394,7 +394,7 @@ def beauty(request):
 
     index = 1
 
-    select_member = Member.objects.filter(sex=sex).first()
+    select_member = Member.objects.filter(sex=1).first()
     v_open_id = select_member.open_id
     v_name = select_member.name
 
