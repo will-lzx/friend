@@ -221,7 +221,11 @@ def save_member(request):
         }
 
         try:
-            Member.objects.update_or_create(**member_dict, defaults={'open_id': open_id})
+            member = Member.objects.filter(open_id=open_id)
+            if member:
+                member.update(**member_dict)
+            else:
+                Member.objects.create(**member_dict)
         except Exception as ex:
             template_name = 'weixin/exception.html'
             print('create member exception, ', str(ex))
