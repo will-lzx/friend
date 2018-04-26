@@ -1,6 +1,7 @@
 import base64
 import datetime
 import io
+from random import randint
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -16,7 +17,6 @@ from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR, SEX
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info, is_studymember, \
     is_expertmember
 from weixin.models import Issue, Member, Pic, Expert, StudyMember
-from PIL import Image
 import logging
 
 log = logging.getLogger('django')
@@ -383,8 +383,33 @@ def beauty(request):
 
     open_id = get_open_id(request)
 
+    member = Member.objects.filter(open_id=open_id).first()
+
+    if member.sex == 0:
+        sex = 1
+    else:
+        sex = 0
+
+    last = Member.objects.filter(sex=sex).count() - 1
+
+    index = randint(0, last)
+
+    select_member = Member.objects.all(sex=sex)[index]
+    v_open_id = select_member.open_id
+    v_name = select_member.name
+
+    images = Pic.objects.filter(open_id=select_member.open_id, member_type=1)
+
+    if images:
+        v_image = images.first().binary.decode()
+    else:
+        v_image = ''
+
     context = {
         'open_id': open_id,
+        'v_name': v_name,
+        'v_open_id': v_open_id,
+        'v_image': v_image
     }
 
     response = render(request, template_name, context)

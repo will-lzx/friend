@@ -1,5 +1,59 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <span>beauties</span>
+    <div id="main-show">
+        <div class="nr_con_all_pr">
+            <div class="gr_top">
+                <img src="{{ v_image }}" id="head" onload="AutoResizeImage(this)" class="gr_tx" alt="默认头像">
+           </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>{{ v_name }}</p>
+            </div>
+
+            <div class="weui-cell__bd">
+                <p>{{ v_age }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div>
+        <a href="#" class="weui-btn weui-btn_mini weui-btn_warn" onclick="">不喜欢</a>
+        <a href="#" class="weui-btn weui-btn_mini weui-btn_primary" onclick="">喜欢</a>
+    </div>
+
+    <script>
+        function AutoResizeImage(objImg) {
+            var maxWidth = window.screen.width;
+            var maxHeight = 0;
+            var img = new Image();
+            img.src = objImg.src;
+            var hRatio;
+            var wRatio;
+            var Ratio = 1;
+            var w = img.width;
+            var h = img.height;
+            wRatio = maxWidth / w;
+            hRatio = maxHeight / h;
+            if (maxWidth === 0 && maxHeight === 0) {
+                Ratio = 1;
+            } else if (maxWidth === 0) {//
+                if (hRatio < 1) Ratio = hRatio;
+            } else if (maxHeight === 0) {
+                if (wRatio < 1) Ratio = wRatio;
+            } else if (wRatio < 1 || hRatio < 1) {
+                Ratio = (wRatio <= hRatio ? wRatio : hRatio);
+            }
+            if (Ratio < 1) {
+                w = w * Ratio;
+                h = h * Ratio;
+            }
+            objImg.height = h;
+            objImg.width = w;
+        }
+    </script>
+
 {% endblock %}
