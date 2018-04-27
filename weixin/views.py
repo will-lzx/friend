@@ -454,7 +454,8 @@ def get_private(open_id, member_type):
         if value:
             data = value
         else:
-            data = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
+            image = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
+            data = image.first().binary
             cache.set(key, data, NEVER_REDIS_TIMEOUT)
 
         context = {
