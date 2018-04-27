@@ -388,7 +388,6 @@ def beauty(request):
 
     member = Member.objects.filter(open_id=open_id).first()
 
-    sex = 2
     key = 'open_id_members_' + open_id
     value = cache.get(key)
     if value:
@@ -427,7 +426,7 @@ def beauty(request):
         data = images
         cache.set(key, images, NEVER_REDIS_TIMEOUT)
 
-    v_image = data.filter(open_id=v_open_id)
+    v_image = data.filter(open_id=v_open_id, member_type=1)
 
     context = {
         'open_id': open_id,
