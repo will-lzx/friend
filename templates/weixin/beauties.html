@@ -18,16 +18,18 @@
             </div>
 
         </div>
+
+        <div>
+            <a href="#" class="weui-btn weui-btn_mini weui-btn_warn" onclick="">不喜欢</a>
+            <a href="#" class="weui-btn weui-btn_mini weui-btn_primary" onclick="">喜欢</a>
+        </div>
     </div>
 
-    <div style="display: block" id="detail">
+    <div style="display: block" id="detail" onclick="hide_div()">
 
     </div>
 
-    <div>
-        <a href="#" class="weui-btn weui-btn_mini weui-btn_warn" onclick="">不喜欢</a>
-        <a href="#" class="weui-btn weui-btn_mini weui-btn_primary" onclick="">喜欢</a>
-    </div>
+
 
     <script>
         function AutoResizeImage(objImg) {
@@ -74,6 +76,11 @@
                     $('#detail').html(result);
                 }
             });
+        }
+
+        function hide_div() {
+            $('#detail').hide();
+            $('#main-show').show();
         }
     </script>
 
