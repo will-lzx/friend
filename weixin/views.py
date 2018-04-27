@@ -452,10 +452,10 @@ def get_private(open_id, member_type):
         key = 'open_id_pic_' + open_id
         value = cache.get(key)
         if value:
-            data = json.loads(value)
+            data = value
         else:
             data = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
-            cache.set(key, json.dumps(data), NEVER_REDIS_TIMEOUT)
+            cache.set(key, data, NEVER_REDIS_TIMEOUT)
 
         context = {
             'name': name,
