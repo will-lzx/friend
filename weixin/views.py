@@ -136,17 +136,17 @@ def join(member_type, open_id):
     start_value = START_YEAR
 
     for i in range(80):
-        years[i+1] = start_value - i
+        years[i + 1] = start_value - i
 
     start_value = 1
 
     for i in range(12):
-        months[i+1] = start_value + i
+        months[i + 1] = start_value + i
 
     start_value = 1
 
     for i in range(31):
-        days[i+1] = start_value + i
+        days[i + 1] = start_value + i
 
     context = {
         'member_type': member_type,
@@ -236,7 +236,8 @@ def save_member(request):
             'phone_number': phone_number,
             'weixin_qq': number_type + ':' + number,
             'sex': sex,
-            'birth': datetime.datetime.strptime(str(START_YEAR - int(birth_year) + 1) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d'),
+            'birth': datetime.datetime.strptime(
+                str(START_YEAR - int(birth_year) + 1) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d'),
             'location': home_city,
             'createtime': datetime.datetime.now(),
             'open_id': open_id,
@@ -460,3 +461,42 @@ def get_private(open_id, member_type):
 
         return context
 
+
+@csrf_exempt
+def get_detail(request):
+    v_open_id = request.POST.get('v_open_id', None)
+    member_type = request.POST.get('member_type', None)
+
+    image = Pic.objects.filter(open_id=v_open_id, index=1, member_type=member_type)
+    if image:
+        image = image.first().binary.decode()
+        log.info(image)
+    member = Member.objects.filter(open_id=v_open_id).first()
+
+    numbers = member.weixin_qq.split(':')
+    numberType = NUMBER_TYPE[int(numbers[0])]
+    number = numbers[1]
+
+    html = '<div class="nr_con_all_pr">' \
+           '<div class="gr_top"><img src="{}" id="head" onload="AutoResizeImage(this)" ' \
+           'class="gr_tx" alt="默认头像"></div></div>' \
+           '<div class="weui-cell"><div class="weui-cell__bd"><p>{}</p></div>' \
+           '<div class="weui-cell__bd"><p>{}</p></div></div><div ' \
+           'class="weui-cells__title">我的信息</div><div class="weui-cells">' \
+           '<div class="weui-cell"><div class="weui-cell__bd"><p>性别</p></div>' \
+           '<div class="weui-cell__ft">{}</div></div><div class="weui-cell">' \
+           '<div class="weui-cell__bd"><p>出生年月</p></div>' \
+           '<div class="weui-cell__ft">{}</div></div><div class="weui-cell">' \
+           '<div class="weui-cell__bd"><p>手机号码</p></div><div class="weui-cell__ft">{}</div></div>' \
+           '<div class="weui-cell"><div class="weui-cell__bd"><p>{}</p></div>' \
+           '<div class="weui-cell__ft">{}</div></div>' \
+           '<div class="weui-cell"><div class="weui-cell__bd"><p>所在城市</p></div>' \
+           '<div class="weui-cell__ft">{}</div></div></div>'.format(image, '银牌会员',
+                                                                            SEX[member.sex],
+                                                                            str(member.birth),
+                                                                            member.phone_number,
+                                                                            numberType,
+                                                                            number,
+                                                                            member.location)
+
+    return HttpResponse(html)

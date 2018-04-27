@@ -33,6 +33,8 @@ urlpatterns = [
 
     url(r'^save_member/$', views.save_member, name='save_member'),
     url(r'^detail_submit/$', views.detail_submit, name='detail_submit'),
+    url(r'^get_detail/$', views.get_detail, name='get_detail'),
+
     url(r'^upload/$', views.upload, name='upload'),
     url(r'^save_image/$', views.save_image, name='save_image'),
 

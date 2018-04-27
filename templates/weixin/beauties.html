@@ -4,7 +4,7 @@
     <div id="main-show">
         <div class="nr_con_all_pr">
             <div class="gr_top">
-                <img src="{{ v_image }}" id="head" onload="AutoResizeImage(this)" class="gr_tx" alt="默认头像">
+                <img src="{{ v_image }}" id="head" onload="AutoResizeImage(this)" class="gr_tx" alt="默认头像" onclick="get_detail('{{ v_openid }}')">
            </div>
         </div>
 
@@ -18,6 +18,10 @@
             </div>
 
         </div>
+    </div>
+
+    <div style="display: block" id="detail">
+
     </div>
 
     <div>
@@ -53,6 +57,23 @@
             }
             objImg.height = h;
             objImg.width = w;
+        }
+
+        function get_detail(v_open_id)
+        {
+            $.ajax({
+                type:"post",
+                url:"/weixin/get_detail/",//自己填写请求地址
+                data:{
+                    v_open_id: v_open_id,
+                    member_type: 1
+                },
+                success:function(result){
+                    $('#main-show').hide();
+                    $('#detail').show();
+                    $('#detail').html(result);
+                }
+            });
         }
     </script>
 
