@@ -492,12 +492,14 @@ def get_detail(request):
            '<div class="weui-cell"><div class="weui-cell__bd"><p>{}</p></div>' \
            '<div class="weui-cell__ft">{}</div></div>' \
            '<div class="weui-cell"><div class="weui-cell__bd"><p>所在城市</p></div>' \
-           '<div class="weui-cell__ft">{}</div></div></div>'.format(image, '银牌会员',
-                                                                            SEX[member.sex],
-                                                                            str(member.birth),
-                                                                            member.phone_number,
-                                                                            numberType,
-                                                                            number,
-                                                                            member.location)
+           '<div class="weui-cell__ft">{}</div></div></div>'.format(image,
+                                                                    member.name,
+                                                                    '银牌会员',
+                                                                    SEX[member.sex],
+                                                                    str(member.birth),
+                                                                    member.phone_number,
+                                                                    numberType,
+                                                                    number,
+                                                                    member.location)
 
     return HttpResponse(html)
