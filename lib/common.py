@@ -2,11 +2,12 @@ import time
 
 import datetime
 
+from django.core.cache import cache
 from wechatpy import WeChatClient
 
-from friendplatform.settings import WEIXIN_APPID, WEIXIN_APPSECRET
+from friendplatform.settings import WEIXIN_APPID, WEIXIN_APPSECRET, NEVER_REDIS_TIMEOUT
 from lib.url_request import UrlRequest
-from weixin.models import Customer, StudyMember, Member, Expert
+from weixin.models import Customer, StudyMember, Member, Expert, Pic
 
 
 def create_timestamp():
@@ -57,3 +58,16 @@ def is_expertmember(openid):
         if expert:
             return True
     return False
+
+
+def get_set_private_image(key):
+    value = cache.get(key)
+    if value:
+        data = value
+    else:
+        data = data
+        images = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
+        image = images.first().binary.decode()
+        cache.set(key, data, NEVER_REDIS_TIMEOUT)
+
+    return data

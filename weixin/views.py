@@ -2,7 +2,7 @@ import base64
 import datetime
 import io
 import json
-from random import randint
+from random import randint, choice
 
 from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseRedirect
@@ -388,19 +388,32 @@ def beauty(request):
 
     member = Member.objects.filter(open_id=open_id).first()
 
-    if member:
-        if member.sex == 0:
-            sex = 1
-        else:
-            sex = 0
-
-        last = Member.objects.filter(sex=sex).count() - 1
-
-        index = 1
-
-        select_member = Member.objects.filter(sex=1).first()
+    key = 'open_id_members_' + open_id
+    value = cache.get(key)
+    if value:
+        data = value
     else:
-        select_member = Member.objects.all().first()
+        member = Member.objects.filter(open_id=open_id).first()
+
+        if member:
+            if member.sex == 0:
+                sex = 1
+            else:
+                sex = 0
+
+            last = Member.objects.filter(sex=sex)
+
+            index = 1
+
+            members = Member.objects.filter(sex=1)
+        else:
+            members = Member.objects.all()
+
+        data = members
+
+        cache.set(key, data, NEVER_REDIS_TIMEOUT)
+
+    select_member = choice(data)
 
     v_open_id = select_member.open_id
     v_name = select_member.name
@@ -458,8 +471,6 @@ def get_private(open_id, member_type):
             data = image.first().binary.decode()
             cache.set(key, data, NEVER_REDIS_TIMEOUT)
 
-        log.info(data)
-
         context = {
             'name': name,
             'sex': SEX[int(sex)],
@@ -484,7 +495,6 @@ def get_detail(request):
     image = Pic.objects.filter(open_id=v_open_id, index=1, member_type=member_type)
     if image:
         image = image.first().binary.decode()
-        log.info(image)
     member = Member.objects.filter(open_id=v_open_id).first()
 
     numbers = member.weixin_qq.split(':')
