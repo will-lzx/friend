@@ -388,13 +388,12 @@ def beauty(request):
 
     member = Member.objects.filter(open_id=open_id).first()
 
+    sex = 2
     key = 'open_id_members_' + open_id
     value = cache.get(key)
     if value:
         data = value
     else:
-        member = Member.objects.filter(open_id=open_id).first()
-
         if member:
             if member.sex == 0:
                 sex = 1
@@ -418,12 +417,17 @@ def beauty(request):
     v_open_id = select_member.open_id
     v_name = select_member.name
 
-    images = Pic.objects.filter(open_id=select_member.open_id, member_type=1)
+    key = 'all_images'
+    value = cache.get(key)
 
-    if images:
-        v_image = images.first().binary.decode()
+    if value:
+        data = value
     else:
-        v_image = ''
+        images = Pic.objects.filter(member_type=1, open_id__in=data.values('open_id'))
+        data = images
+        cache.set(key, images, NEVER_REDIS_TIMEOUT)
+
+    v_image = data.filter(open_id=v_open_id)
 
     context = {
         'open_id': open_id,
