@@ -469,6 +469,7 @@ def get_private(open_id, member_type):
         return context
 
 
+@cache_page(60)
 @csrf_exempt
 def get_detail(request):
     v_open_id = request.POST.get('v_open_id', None)
