@@ -134,7 +134,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://106.14.151.3:6379",
+        "LOCATION": "redis://127.0.0.1:6379",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
