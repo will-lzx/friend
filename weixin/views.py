@@ -465,6 +465,7 @@ def get_private(open_id, member_type):
 @csrf_exempt
 def get_detail(request):
     v_open_id = request.POST.get('v_open_id', None)
+    log.info('v_open_id' + str(v_open_id))
     member_type = request.POST.get('member_type', None)
 
     image = Pic.objects.filter(open_id=v_open_id, index=1, member_type=member_type)
