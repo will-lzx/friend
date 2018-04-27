@@ -493,13 +493,30 @@ def get_private(open_id, member_type):
 def get_detail(request):
     v_open_id = request.POST.get('v_open_id', None)
     log.info('v_open_id' + str(v_open_id))
+    open_id = get_open_id(request)
     member_type = request.POST.get('member_type', None)
 
-    image = Pic.objects.filter(open_id=v_open_id, index=1, member_type=member_type)
+    key = 'all_images'
+    value = cache.get(key)
+
+    if value:
+        data = value
+    else:
+        data = value
+        log.info('should contain')
+
+    image = data.filter(open_id=v_open_id, index=1, member_type=member_type)
     if image:
         image = image.first().binary.decode()
-    member = Member.objects.filter(open_id=v_open_id).first()
 
+    key = 'open_id_members_' + open_id
+    value = cache.get(key)
+    if value:
+        members = value
+    else:
+        members = Member.objects.all()
+
+    member = members.filter(open_id=v_open_id).first()
     numbers = member.weixin_qq.split(':')
     numberType = NUMBER_TYPE[int(numbers[0])]
     number = numbers[1]
