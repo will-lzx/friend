@@ -7,6 +7,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 from wechatpy import parse_message, create_reply
 from wechatpy.events import SubscribeEvent
@@ -379,6 +380,7 @@ def save_image(request):
     return HttpResponse('success')
 
 
+@cache_page(60)
 def beauty(request):
     template_name = 'weixin/beauties.html'
 
@@ -399,7 +401,7 @@ def beauty(request):
         select_member = Member.objects.filter(sex=1).first()
     else:
         select_member = Member.objects.all().first()
-        
+
     v_open_id = select_member.open_id
     v_name = select_member.name
 
