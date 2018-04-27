@@ -458,6 +458,8 @@ def get_private(open_id, member_type):
             data = image.first().binary
             cache.set(key, data, NEVER_REDIS_TIMEOUT)
 
+        log.info(data)
+
         context = {
             'name': name,
             'sex': SEX[int(sex)],
