@@ -1,20 +1,21 @@
 import base64
 import datetime
 import io
+import json
 from random import randint
 
+from django.core.cache import cache
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 from wechatpy import parse_message, create_reply
 from wechatpy.events import SubscribeEvent
 from wechatpy.exceptions import InvalidSignatureException
 from wechatpy.utils import check_signature
 
-from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR, SEX
+from friendplatform.settings import WECHAT_TOKEN, NUMBER_TYPE, START_YEAR, SEX, NEVER_REDIS_TIMEOUT
 from lib.common import create_timestamp, subcribe_save_openid, get_openid, get_user_info, is_studymember, \
     is_expertmember
 from weixin.models import Issue, Member, Pic, Expert, StudyMember
@@ -380,7 +381,6 @@ def save_image(request):
     return HttpResponse('success')
 
 
-@cache_page(60)
 def beauty(request):
     template_name = 'weixin/beauties.html'
 
@@ -449,10 +449,13 @@ def get_private(open_id, member_type):
         numberType = NUMBER_TYPE[int(numbers[0])]
         number = numbers[1]
 
-        image = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
-        if image:
-            image = image.first().binary.decode()
-            log.info(image)
+        key = 'open_id_pic_' + open_id
+        value = cache.get(key)
+        if value:
+            data = json.loads(value)
+        else:
+            data = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
+            cache.set(key, json.dumps(data), NEVER_REDIS_TIMEOUT)
 
         context = {
             'name': name,
@@ -463,13 +466,12 @@ def get_private(open_id, member_type):
             'numberType': numberType,
             'number': number,
             'memberType': '银牌会员',
-            'image': image
+            'image': data
         }
 
         return context
 
 
-@cache_page(60)
 @csrf_exempt
 def get_detail(request):
     v_open_id = request.POST.get('v_open_id', None)
