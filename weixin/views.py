@@ -386,16 +386,20 @@ def beauty(request):
 
     member = Member.objects.filter(open_id=open_id).first()
 
-    if member.sex == 0:
-        sex = 1
+    if member:
+        if member.sex == 0:
+            sex = 1
+        else:
+            sex = 0
+
+        last = Member.objects.filter(sex=sex).count() - 1
+
+        index = 1
+
+        select_member = Member.objects.filter(sex=1).first()
     else:
-        sex = 0
-
-    last = Member.objects.filter(sex=sex).count() - 1
-
-    index = 1
-
-    select_member = Member.objects.filter(sex=1).first()
+        select_member = Member.objects.all().first()
+        
     v_open_id = select_member.open_id
     v_name = select_member.name
 
