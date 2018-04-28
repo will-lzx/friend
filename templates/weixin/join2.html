@@ -98,12 +98,6 @@
                         continue;
                     }
 
-                    {#if (file.size > maxSize) {#}
-                    {#    $.weui.alert({#}
-                    {#        text: '图片太大，不允许上传'#}
-                    {#    });#}
-                    {#    continue;}#}
-
                     if ($('.weui_uploader_file').length >= maxCount) {
                         $.weui.alert({
                             text: '最多只能上传' + maxCount + '张图片'
@@ -175,5 +169,12 @@
                 }
             });
         }
+
+        $("#description").keyup(function() {
+            if ($("#description").val().length > 160) {
+                $("#description").val($("#title").val().substring(0, 160));
+            }
+            $("#wordCountShow").text((160 - $("#description").val().length) + ' / 160');
+        });
     </script>
 {% endblock %}
