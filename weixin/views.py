@@ -282,14 +282,14 @@ def detail_submit(request):
                     'grade': 3,
                     'online': 1,
                     'member_id': member.first().id,
-                    'description': description,
+                    'description': str(description),
                     'createtime': datetime.datetime.now()
                 }
                 Expert.objects.create(**expert_dict)
             else:
                 study_dict = {
                     'member_id': member.first().id,
-                    'description': description,
+                    'description': str(description),
                     'createtime': datetime.datetime.now(),
                     'member_type': 0
                 }
