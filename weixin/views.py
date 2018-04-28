@@ -411,6 +411,13 @@ def beauty(request):
 
         cache.set(key, data, NEVER_REDIS_TIMEOUT)
 
+    if not data:
+        template_name = 'weixin/exception.html'
+        context = {
+            'exception': '还没有任何会员呢，请稍等管理员添加，谢谢'
+        }
+        response = render(request, template_name, context)
+        return response
     select_member = choice(data)
 
     v_open_id = select_member.open_id
