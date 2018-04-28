@@ -422,7 +422,7 @@ def beauty(request):
     if value:
         data = value
     else:
-        images = Pic.objects.filter(member_type=1, open_id__in=data.values('open_id'))
+        images = Pic.objects.filter(member_type=1, open_id__in=data.distinct().values('open_id'))
         data = images
         cache.set(key, images, NEVER_REDIS_TIMEOUT)
 
@@ -469,10 +469,12 @@ def get_private(open_id, member_type):
         value = cache.get(key)
         if value:
             data = value
+            log.info('get pic from cache')
         else:
             image = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
             data = image.first().binary.decode()
             cache.set(key, data, NEVER_REDIS_TIMEOUT)
+            log.info('get pic from sql')
 
         context = {
             'name': name,
@@ -513,9 +515,10 @@ def get_detail(request):
     value = cache.get(key)
     if value:
         members = value
+        log.info('get member from cache')
     else:
         members = Member.objects.all()
-
+        log.info('get from sql')
     member = members.filter(open_id=v_open_id).first()
     numbers = member.weixin_qq.split(':')
     numberType = NUMBER_TYPE[int(numbers[0])]
