@@ -513,9 +513,10 @@ def get_detail(request):
     value = cache.get(key)
 
     if value:
-        data = value
+        data = value[0]
     else:
-        data = value
+        data = Pic.objects.filter(open_id=v_open_id, member_type=member_type).order_by('index').first().binary.decode()
+        cache.set(key, [data], NEVER_REDIS_TIMEOUT)
         log.info('should contain')
 
     image = data
