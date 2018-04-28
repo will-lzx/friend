@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form id="fm" action="/weixin/update_member/" method="post" style="margin:0;padding:10px">
+        <div class="div-right">
+            <a href="#" type="submit">保存</a>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="name-select">
+                        <option selected="" value="1">姓名</option>
+                    </select>
+                </div>
+
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" required name="name" placeholder="{{ name }}" maxlength="15">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="select1">
+                        <option selected="" value="1">性别</option>
+                    </select>
+                </div>
+
+
+            </div>
+
+            <div class="weui-cell_select weui-cell_select-before">
+                <div class="weui-cells__hd">
+                    <select class="weui-select" name="sex">
+                        {% for k, v in sex.items %}
+                            <option value="{{ k }}" {% ifequal v sex %}selected{% endifequal %}>{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="number-type">
+                        {% for k, v in number_type.items %}
+                            <option value="{{ k }}" {% ifequal v numberType %}selected{% endifequal %}>{{ v }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" required name="number" placeholder="请输入号码" maxlength="80" value="{{ number }}">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="number-location">
+                        <option value="1">+86</option>
+                    </select>
+                </div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="number" required name="phone-number" pattern="[0-9]*" placeholder="请输入手机号码" value="{{ phoneNumber }}" oninput="if(value.length>11)value=value.slice(0,11)">
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="city">
+                        <option value="1">城市</option>
+                    </select>
+                </div>
+                <div class="weui-cell__bd">
+                  <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110000">
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-cell">
+            <div class="weui-cell weui-cell_select weui-cell_select-before">
+
+                <div class="weui-cell__hd">
+                    <select class="weui-select" name="select2">
+                        <option value="1">生日</option>
+                    </select>
+                </div>
+                <div style="padding: 20px">
+                    <div class="weui-cell__bd">
+                        <select class="weui-select" name="birth-year">
+                            {% for k, v in years.items %}
+                                <option value="{{ k }}" {% ifequal v birth-year %}selected{% endifequal %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <select class="weui-select" name="birth-month">
+                            {% for k, v in months.items %}
+                                <option value="{{ k }}" {% ifequal v birth-month %}selected{% endifequal %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <select class="weui-select" name="birth-day">
+                            {% for k, v in days.items %}
+                                <option value="{{ k }}" {% ifequal v birth-day %}selected{% endifequal %}>{{ v }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+
+    <script>
+      $("#home-city").cityPicker({
+        title: "选择目的地",
+        showDistrict: false,
+        onChange: function (picker, values, displayValues) {
+          console.log(values, displayValues);
+        }
+      });
+
+    </script>
+{% endblock %}

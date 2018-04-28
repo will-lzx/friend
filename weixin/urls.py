@@ -28,6 +28,8 @@ urlpatterns = [
     url(r'^member_join/$', views.member_join, name='member_join'),
     url(r'^show_member/$', views.show_member, name='show_member'),
 
+    url(r'^update_member/$', views.update_member, name='update_member'),
+
     url(r'^expert_join/$', views.expert_join, name='expert_join'),
     url(r'^show_expert/$', views.show_expert, name='show_expert'),
 
@@ -42,4 +44,7 @@ urlpatterns = [
     url(r'^issue/$', views.issue, name='issue'),
     url(r'^save_issue/$', views.save_issue, name='save_issue'),
     url(r'^exception/$', views.exception, name='exception'),
+
+    url(r'^editprivate/$', views.editprivate, name='editprivate'),
+
 ]

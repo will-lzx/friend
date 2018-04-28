@@ -268,6 +268,55 @@ def save_member(request):
 
 
 @csrf_exempt
+def update_member(request):
+    exception_template_name = 'weixin/exception.html'
+    open_id = get_open_id(request)
+    members = Member.objects.filter(open_id=open_id)
+    if members:
+        member = members.first()
+    else:
+        member_not_exist = '会员信息不存在'
+        log.info(member_not_exist)
+        context = {
+            'exception': member_not_exist
+        }
+        response = render(request, exception_template_name, context)
+        return response
+    if request.method == 'POST':
+        name = request.POST.get('name', None)
+        sex = request.POST.get('sex', None)
+        number_type = request.POST.get('number-type', None)
+        number = request.POST.get('number', None)
+        number_location = request.POST.get('number-location', None)
+        phone_number = request.POST.get('phone-number', None)
+        birth_year = request.POST.get('birth-year', None)
+        birth_month = request.POST.get('birth-month', None)
+        birth_day = request.POST.get('birth-day', None)
+        home_city = request.POST.get('home-city', None)
+        member_type = request.POST.get('member_type', None)
+
+        try:
+            member.name = name
+            member.phone_number = phone_number
+            member.weixin_qq = number_type + ':' + number
+            member.sex = sex
+            member.birth = datetime.datetime.strptime(
+                    str(START_YEAR - int(birth_year) + 1) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d')
+
+            member.location = home_city
+            member.save()
+        except Exception as ex:
+            log.info(str(ex))
+            context = {
+                'exception': str(ex)
+            }
+            response = render(request, exception_template_name, context)
+            return response
+
+    return HttpResponseRedirect('/weixin/privatecenter/')
+
+
+@csrf_exempt
 def detail_submit(request):
     open_id = get_open_id(request)
     if request.method == 'POST':
@@ -347,6 +396,53 @@ def exception(request):
 
     response = render(request, template_name)
     return response
+
+
+@csrf_exempt
+def editprivate(request):
+    template_name = 'weixin/editprivate.html'
+    open_id = get_open_id(request)
+
+    member_type = 0
+    member = Member.objects.filter(open_id=open_id)
+    if member:
+        member = member.first()
+        name = member.name
+        sex = member.sex
+        city = member.location
+        phoneNumber = member.phone_number
+        numbers = member.weixin_qq.split(':')
+        numberType = NUMBER_TYPE[int(numbers[0])]
+        number = numbers[1]
+
+        key = 'open_id_pic_' + open_id
+        value = cache.get(key)
+        if value:
+            data = value
+            log.info('get pic from cache')
+        else:
+            image = Pic.objects.filter(open_id=open_id, index=1, member_type=member_type)
+            data = image.first().binary.decode()
+            cache.set(key, data, NEVER_REDIS_TIMEOUT)
+            log.info('get pic from sql')
+
+        birth = str(member.birth).split(' ')[0].split('-')
+
+        context = {
+            'name': name,
+            'sex': SEX[int(sex)],
+            'city': city,
+            'birth-year': birth[0],
+            'birth-month': birth[1],
+            'birth-day': birth[2],
+            'phoneNumber': phoneNumber,
+            'numberType': numberType,
+            'number': number,
+            'image': data
+        }
+
+        response = render(request, template_name, context)
+        return response
 
 
 @csrf_exempt
