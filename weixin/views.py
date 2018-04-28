@@ -428,6 +428,25 @@ def editprivate(request):
 
         birth = str(member.birth).split(' ')[0].split('-')
 
+        years = {}
+        months = {}
+        days = {}
+        start_value = START_YEAR
+
+        for i in range(80):
+            years[i + 1] = start_value - i
+
+        start_value = 1
+
+        for i in range(12):
+            months[i + 1] = start_value + i
+
+        start_value = 1
+
+        for i in range(31):
+            days[i + 1] = start_value + i
+
+
         context = {
             'name': name,
             'sex': SEX[int(sex)],
@@ -436,6 +455,9 @@ def editprivate(request):
             'birth_year': birth[0],
             'birth_month': birth[1],
             'birth_day': birth[2],
+            'years': years,
+            'months': months,
+            'days': days,
             'phoneNumber': phoneNumber,
             'numberType': numberType,
             'numberType_dict': NUMBER_TYPE,
