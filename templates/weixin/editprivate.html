@@ -99,19 +99,19 @@
                     <div class="weui-cell__bd">
                         <select class="weui-select" name="birth-year">
                             {% for k, v in years.items %}
-                                <option value="{{ k }}" {% ifequal v birth-year %}selected{% endifequal %}>{{ v }}</option>
+                                <option value="{{ k }}" {% ifequal v birth_year %}selected{% endifequal %}>{{ v }}</option>
                             {% endfor %}
                         </select>
 
                         <select class="weui-select" name="birth-month">
                             {% for k, v in months.items %}
-                                <option value="{{ k }}" {% ifequal v birth-month %}selected{% endifequal %}>{{ v }}</option>
+                                <option value="{{ k }}" {% ifequal v birth_month %}selected{% endifequal %}>{{ v }}</option>
                             {% endfor %}
                         </select>
 
                         <select class="weui-select" name="birth-day">
                             {% for k, v in days.items %}
-                                <option value="{{ k }}" {% ifequal v birth-day %}selected{% endifequal %}>{{ v }}</option>
+                                <option value="{{ k }}" {% ifequal v birth_day %}selected{% endifequal %}>{{ v }}</option>
                             {% endfor %}
                         </select>
                     </div>
