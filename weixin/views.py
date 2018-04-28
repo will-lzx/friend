@@ -421,10 +421,12 @@ def beauty(request):
 
     if value:
         data = value
+        log.info('get image from all_images')
     else:
         images = Pic.objects.filter(member_type=1, open_id__in=data.distinct().values('open_id'))
         data = images
         cache.set(key, images, NEVER_REDIS_TIMEOUT)
+        log.info('set all images cache')
 
     v_image = data.filter(open_id=v_open_id, member_type=1)
 
