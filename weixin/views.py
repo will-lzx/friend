@@ -431,6 +431,7 @@ def editprivate(request):
         context = {
             'name': name,
             'sex': SEX[int(sex)],
+            'sex_list': SEX,
             'city': city,
             'birth_year': birth[0],
             'birth_month': birth[1],
