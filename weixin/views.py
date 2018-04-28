@@ -416,19 +416,28 @@ def beauty(request):
     v_open_id = select_member.open_id
     v_name = select_member.name
 
-    key = 'all_images'
+    key = 'pic_' + v_open_id
     value = cache.get(key)
 
     if value:
-        data = value
+        data = value[0]
         log.info('get image from all_images')
     else:
-        images = Pic.objects.filter(member_type=1, open_id__in=data.distinct().values('open_id'))
-        data = images
-        cache.set(key, images, NEVER_REDIS_TIMEOUT)
-        log.info('set all images cache')
+        images = Pic.objects.filter(member_type=1, open_id__in=data.distinct().values('open_id')).order_by('index')
 
-    v_image = data.filter(open_id=v_open_id, member_type=1).first().binary.decode()
+        for image in images:
+            key = 'pic_' + image.open_id
+            binary = image.binary.decode()
+            if image.open_id == v_open_id:
+                data = binary
+            v = cache.get(key)
+            if v:
+                v.append(binary)
+                cache.set(key, v, NEVER_REDIS_TIMEOUT)
+            else:
+                cache.set(key, [binary], NEVER_REDIS_TIMEOUT)
+
+    v_image = data
 
     context = {
         'open_id': open_id,
@@ -500,7 +509,7 @@ def get_detail(request):
     open_id = get_open_id(request)
     member_type = request.POST.get('member_type', None)
 
-    key = 'all_images'
+    key = 'pic_' + v_open_id
     value = cache.get(key)
 
     if value:
@@ -509,9 +518,7 @@ def get_detail(request):
         data = value
         log.info('should contain')
 
-    image = data.filter(open_id=v_open_id, index=1, member_type=member_type)
-    if image:
-        image = image.first().binary.decode()
+    image = data
 
     key = 'open_id_members_' + open_id
     value = cache.get(key)
