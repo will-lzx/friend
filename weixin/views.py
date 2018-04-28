@@ -428,7 +428,7 @@ def beauty(request):
         cache.set(key, images, NEVER_REDIS_TIMEOUT)
         log.info('set all images cache')
 
-    v_image = data.filter(open_id=v_open_id, member_type=1)
+    v_image = data.filter(open_id=v_open_id, member_type=1).first().binary.decode()
 
     context = {
         'open_id': open_id,
