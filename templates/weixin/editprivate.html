@@ -35,7 +35,7 @@
             <div class="weui-cell_select weui-cell_select-before">
                 <div class="weui-cells__hd">
                     <select class="weui-select" name="sex">
-                        {% for k, v in sex_list.items %}
+                        {% for k, v in sex_dict.items %}
                             <option value="{{ k }}" {% ifequal v sex %}selected{% endifequal %}>{{ v }}</option>
                         {% endfor %}
                     </select>
@@ -48,7 +48,7 @@
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
                     <select class="weui-select" name="number-type">
-                        {% for k, v in number_type.items %}
+                        {% for k, v in numberType_dict.items %}
                             <option value="{{ k }}" {% ifequal v numberType %}selected{% endifequal %}>{{ v }}</option>
                         {% endfor %}
                     </select>

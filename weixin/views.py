@@ -431,13 +431,14 @@ def editprivate(request):
         context = {
             'name': name,
             'sex': SEX[int(sex)],
-            'sex_list': SEX,
+            'sex_dict': SEX,
             'city': city,
             'birth_year': birth[0],
             'birth_month': birth[1],
             'birth_day': birth[2],
             'phoneNumber': phoneNumber,
             'numberType': numberType,
+            'numberType_dict': NUMBER_TYPE,
             'number': number,
             'image': data
         }
