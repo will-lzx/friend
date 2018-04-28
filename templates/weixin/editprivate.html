@@ -35,7 +35,7 @@
             <div class="weui-cell_select weui-cell_select-before">
                 <div class="weui-cells__hd">
                     <select class="weui-select" name="sex">
-                        {% for k, v in sex.items %}
+                        {% for k, v in sex_list.items %}
                             <option value="{{ k }}" {% ifequal v sex %}selected{% endifequal %}>{{ v }}</option>
                         {% endfor %}
                     </select>
