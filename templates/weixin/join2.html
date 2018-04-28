@@ -174,7 +174,7 @@
             if ($("#description").val().length > 160) {
                 $("#description").val($("#title").val().substring(0, 160));
             }
-            $("#wordCountShow").text((160 - $("#description").val().length) + ' / 160');
+            $("#wordCountShow").text($("#description").val().length + ' / 160');
         });
     </script>
 {% endblock %}
