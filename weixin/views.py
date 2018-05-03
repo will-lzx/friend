@@ -446,7 +446,6 @@ def editprivate(request):
         for i in range(31):
             days[i + 1] = start_value + i
 
-
         context = {
             'name': name,
             'sex': SEX[int(sex)],
