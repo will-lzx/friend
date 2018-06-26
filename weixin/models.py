@@ -27,6 +27,7 @@ class Member(models.Model):
     weixin_qq = models.CharField(max_length=100, default='')
     sex = models.IntegerField()
     birth = models.DateTimeField()
+    location = models.CharField(max_length=20, default='')
     open_id = models.CharField(max_length=200, default='', unique=True)
     createtime = models.DateTimeField()
     updatetime = models.DateTimeField(auto_now=True)
