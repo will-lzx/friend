@@ -2,10 +2,6 @@
 
 {% block content %}
 
-    <div class="div-right">
-        <a href="/weixin/editprivate/">编辑</a>
-    </div>
-
     <div class="nr_con_all_pr">
         <div class="gr_top">
             <img src="{{ image }}" id="head" onload="AutoResizeImage(this)" class="gr_tx" alt="默认头像">
@@ -55,16 +51,14 @@
                 </div>
                 <div class="weui-cell__ft">{{ number }}</div>
             </div>
-
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <p>所在城市</p>
-                </div>
-                <div class="weui-cell__ft">{{ city }}</div>
-            </div>
         </div>
 
     </div>
+
+    <div class="div-right">
+        <a href="/weixin/editprivate/">编辑</a>
+    </div>
+
     <script>
         function AutoResizeImage(objImg) {
             var maxWidth = window.screen.width;
