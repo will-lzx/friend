@@ -232,6 +232,7 @@ def save_member(request):
         birth_month = request.POST.get('birth-month', None)
         birth_day = request.POST.get('birth-day', None)
         home_city = request.POST.get('home-city', None)
+        log.info(str(home_city))
         member_type = request.POST.get('member_type', None)
         member_dict = {
             'name': name,
