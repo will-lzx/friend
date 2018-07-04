@@ -293,7 +293,7 @@ def update_member(request):
         birth_year = request.POST.get('birth-year', None)
         birth_month = request.POST.get('birth-month', None)
         birth_day = request.POST.get('birth-day', None)
-        home_city = request.POST.get('home-city', None)
+        # home_city = request.POST.get('home-city', None)
         member_type = request.POST.get('member_type', None)
 
         try:
@@ -304,7 +304,7 @@ def update_member(request):
             member.birth = datetime.datetime.strptime(
                     str(START_YEAR - int(birth_year) + 1) + '-' + str(birth_month) + '-' + str(birth_day), '%Y-%m-%d')
 
-            member.location = home_city
+            # member.location = home_city
             member.save()
         except Exception as ex:
             log.info(str(ex))

@@ -3,9 +3,7 @@
 {% block content %}
 
     <form id="fm" action="/weixin/update_member/" method="post" style="margin:0;padding:10px">
-        <div class="div-right">
-            <a href="#" type="submit">保存</a>
-        </div>
+
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
                 <div class="weui-cell__hd">
@@ -74,18 +72,18 @@
             </div>
         </div>
 
-        <div class="weui-cell">
-            <div class="weui-cell weui-cell_select weui-cell_select-before">
-                <div class="weui-cell__hd">
-                    <select class="weui-select" name="city">
-                        <option value="1">城市</option>
-                    </select>
-                </div>
-                <div class="weui-cell__bd">
-                  <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110101">
-                </div>
-            </div>
-        </div>
+{#        <div class="weui-cell">#}
+{#            <div class="weui-cell weui-cell_select weui-cell_select-before">#}
+{#                <div class="weui-cell__hd">#}
+{#                    <select class="weui-select" name="city">#}
+{#                        <option value="1">城市</option>#}
+{#                    </select>#}
+{#                </div>#}
+{#                <div class="weui-cell__bd">#}
+{#                  <input class="weui-input" id="home-city" name="home-city" type="text" readonly="" data-code="110000" data-codes="110000,110101">#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
 
         <div class="weui-cell">
             <div class="weui-cell weui-cell_select weui-cell_select-before">
@@ -120,6 +118,10 @@
             </div>
         </div>
 
+        <div class="div-right">
+            <input class="weui-btn weui-btn_primary" type="submit" value="保存">
+        </div>
+
     </form>
 
     <script>
@@ -130,6 +132,5 @@
           console.log(values, displayValues);
         }
       });
-
     </script>
 {% endblock %}

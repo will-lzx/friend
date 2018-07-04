@@ -2,6 +2,7 @@
 
 {% block content %}
 
+
     <div class="nr_con_all_pr">
         <div class="gr_top">
             <img src="{{ image }}" id="head" onload="AutoResizeImage(this)" class="gr_tx" alt="默认头像">
@@ -63,7 +64,7 @@
     </div>
 
     <div class="div-right">
-        <a href="/weixin/editprivate/">编辑</a>
+        <input class="weui-btn weui-btn_primary" type="submit" value="编辑" onclick="edit()">
     </div>
 
     <script>
@@ -94,6 +95,10 @@
             }
             objImg.height = h;
             objImg.width = w;
+        }
+        
+        function edit() {
+            location.href = '/weixin/editprivate/';
         }
     </script>
 {% endblock %}
